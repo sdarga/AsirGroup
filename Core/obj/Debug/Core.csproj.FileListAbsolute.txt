@@ -1,0 +1,20 @@
+D:\Asır Grup Web\AsirGorup\Core\bin\Debug\Core.dll
+D:\Asır Grup Web\AsirGorup\Core\bin\Debug\Core.pdb
+D:\Asır Grup Web\AsirGorup\Core\obj\Debug\Core.dll
+D:\Asır Grup Web\AsirGorup\Core\obj\Debug\Core.pdb
+D:\Asır Grup Web\AsirGorup\Core\bin\Debug\Newtonsoft.Json.dll
+D:\Asır Grup Web\AsirGorup\Core\bin\Debug\protobuf-net.dll
+D:\Asır Grup Web\AsirGorup\Core\bin\Debug\Newtonsoft.Json.xml
+D:\Asır Grup Web\AsirGorup\Core\bin\Debug\protobuf-net.xml
+D:\Asır Grup Web\AsirGorup\Core\obj\Debug\Core.csprojResolveAssemblyReference.cache
+D:\Projeler\Asir\AsirGorup\Core\bin\Debug\Core.dll
+D:\Projeler\Asir\AsirGorup\Core\bin\Debug\Core.pdb
+D:\Projeler\Asir\AsirGorup\Core\bin\Debug\Newtonsoft.Json.dll
+D:\Projeler\Asir\AsirGorup\Core\bin\Debug\protobuf-net.dll
+D:\Projeler\Asir\AsirGorup\Core\bin\Debug\Newtonsoft.Json.xml
+D:\Projeler\Asir\AsirGorup\Core\bin\Debug\protobuf-net.xml
+D:\Projeler\Asir\AsirGorup\Core\obj\Debug\Core.csprojResolveAssemblyReference.cache
+D:\Projeler\Asir\AsirGorup\Core\obj\Debug\Core.csproj.CoreCompileInputs.cache
+D:\Projeler\Asir\AsirGorup\Core\obj\Debug\Core.csproj.CopyComplete
+D:\Projeler\Asir\AsirGorup\Core\obj\Debug\Core.dll
+D:\Projeler\Asir\AsirGorup\Core\obj\Debug\Core.pdb

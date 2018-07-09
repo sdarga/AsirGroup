@@ -1,0 +1,458 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Core.Dtos.MusteriTeklifMasterDTO
+
+<link href="~/Content/kendo/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/kendo.default.min.css" rel="stylesheet" />
+<link href="~/assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/jquery-multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+
+<link href="~/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/admin/pages/css/portfolio.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-colorpicker/css/colorpicker.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+<link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+
+<style>
+    .fixle {
+        height: 300px;
+    }
+
+    .ms-container {
+        width: 90%;
+    }
+
+    .ms-optgroup-label {
+        color: red;
+    }
+
+    .ms-container .ms-optgroup-label {
+        color: red;
+    }
+
+    #grdlist .k-grid-content {
+        min-height: 100px;
+        min-width: 1000px;
+    }
+</style>
+
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN TODO SIDEBAR -->
+        <div class="todo-ui">
+            <div class="col-md-2">
+                
+                    <div class="portlet box grey-cascade">
+                        <div class="portlet-title">
+                            <div class="caption" data-toggle="collapse" data-target=".todo-project-list-content">
+                                <i class="fa fa-list"></i><span class="font
+							bold">OFFERS</span>
+                                <span class="caption-helper visible-sm-inline-block visible-xs-inline-block">click to view project list</span>
+                            </div>
+                            <div class="actions">
+                                <div class="btn-group">
+                                    <a class="btn grey-cascade btn-circle btn-sm todo-projects-config" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                        <i class="icon-settings"></i> &nbsp; <i class="fa fa-angle-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li>
+                                            <a href="#">
+                                                <i class="i"></i> New Project
+                                            </a>
+                                        </li>
+                                        <li class="divider">
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                Pending <span class="badge badge-danger">
+                                                    4
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                Completed <span class="badge badge-success">
+                                                    12
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                Overdue <span class="badge badge-warning">
+                                                    9
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="divider">
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="i"></i> Archived Projects
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portlet-body" style="height:785px">
+                            <form action="#" class="form-horizontal form-bordered">
+                                <div class="form-body">
+                                    <span class="help-block">
+                                        Select date range
+                                    </span>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="input-group input-medium date date-picker" data-date="getDateFormat(Date.now())" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                                <input id="baslangicTarihi" type="text" class="form-control" readonly>
+                                                <span class="input-group-btn">
+                                                    <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="input-group input-medium date date-picker" data-date="getDateFormat(Date.now())" data-date-format="dd-mm-yyyy" data-date-viewmode="years">
+                                                <input id="bitisTarihi" type="text" class="form-control" readonly>
+                                                <span class="input-group-btn">
+                                                    <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                </span>
+                                            </div>
+                                            <!-- /input-group -->
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <div class="col-md-offset-3 col-md-9">
+                                                <button type="button" class="btn default" style="float: right;" onclick="filtreTemizle()">Clear</button>
+                                                <button type="submit" class="btn grey-cascade" style="float: right;" onclick="RefreshData();"><i class="fa fa-check"></i> Filter</button>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr>
+                            <div class="todo-project-list">
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li class="active">
+                                        <a href="#">
+                                            Last Offer
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span id="spanRecordCount" class="badge badge-success">  </span> View Offers
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Home/Index">
+                                            New Offer
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+</div>
+            <!-- END TODO SIDEBAR -->
+            <!-- BEGIN TODO CONTENT -->
+            <div class="todo-content col-md-10">
+                <div class="portlet box grey-cascade">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-list"></i>Offer List
+                        </div>
+                        <div class="actions">
+                            <div class="btn-group">
+                                <a class="btn btn-default btn-sm" href="#" data-toggle="dropdown">
+                                    <i class="fa fa-cogs"></i> Tools <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-pencil"></i> Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-trash-o"></i> Delete
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-ban"></i> Ban
+                                        </a>
+                                    </li>
+                                    <li class="divider">
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="i"></i> Make admin
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+
+                        <div class="row mix-grid" style="width:0px; height:0px; visibility:hidden">
+                            <div class="col-md-3 col-sm-4 mix category_1" style="width:0px; height:0px; ">
+                                <div class="mix-inner" style="width:0px; height:0px">
+                                    <img style="width:0px; height:0px" src="~/assets/admin/pages/media/works/e0700araba_1_normal.jpg" alt="">
+                                    <div class="mix-details">
+                                        <a class="mix-preview fancybox-button" href="~/assets/admin/pages/media/works/img2.jpg" title="Project Name" data-rel="fancybox-button">
+                                            <i class="fa fa-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="k-grid-content">
+                            @(Html.Kendo().Grid<Core.Dtos.MusteriTeklifMasterDTO>()
+                                    .Name("grdlist")
+                                    .Columns(columns =>
+                                    {
+                                        columns.Bound(c => c.id).Width(100).Title("Offer No").ClientTemplate("#= MasterID #").Visible(true);//columns.Bound(c => c.KucukResim).Title("KucukResim").Width(100).ClientTemplate("<img src='data:image/png;base64," + "@System.Convert.ToBase64String(\"#=KucukResim#\")' />");
+                                        columns.Bound(c => c.Tarih).Title("Offer Date").Width(100).ClientTemplate(string.Format("{0}", "#= getFormatedDate(Tarih) #"));
+                                        columns.Bound(c => c.MKampanyaKodu).Title("Campaign Code").Width(100).ClientTemplate(string.Format("{0}", "#= AciklamaFormatlayici(MKampanyaKodu) #"));
+
+                                        columns.Bound(c => c.MKampanyaAdi).Title("Offer / Campaign Name").Width(200).ClientTemplate(string.Format("{0}", "#= AciklamaFormatlayici(MKampanyaAdi) #"));
+
+                                        columns.Bound(c => c.MKampanyaTarih1).Title("Campaign Start Date").Width(120).ClientTemplate(string.Format("{0}", "#= getFormatedDate(MKampanyaTarih1) #"));
+                                        columns.Bound(c => c.MKampanyaTarih2).Title("Campaign End Date").Width(120).ClientTemplate(string.Format("{0}", "#= getFormatedDate(MKampanyaTarih2) #"));
+                                        columns.Bound(c => c.StokVerildi).Title("Stocked").Width(80).ClientTemplate("<input type='checkbox' #= StokVerildi ? 'checked= checked' : '' # disabled='disabled' ></input>");
+                                        columns.Bound(c => c.SiparisiGeldi).Title("Ordered").Width(80).ClientTemplate("<input type='checkbox' #= SiparisiGeldi ? 'checked= checked' : '' # disabled='disabled' ></input>");
+                                        //columns.Bound(c => c.MusteriTeklifMaster.TeklifAdi).Title("TeklifAdi").Width(100).ClientTemplate(string.Format("{0}", "#= AciklamaFormatlayici(TeklifAdi) #"));
+
+                                    })
+                                    .Filterable()
+                                    .Resizable(resize => resize.Columns(true))
+                                    .Selectable()
+                                    .Scrollable(s => s.Height(732))
+                                    .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            .Read(read => read.Action("MusteriTeklifMasterGetir", "MusteriTeklifleri").Data("GetData")))
+                            .ClientDetailTemplateId("client-template")
+                            //.ToClientTemplate()
+                            )
+                        </div>
+                    </div>
+                </div>
+                <!-- END TODO CONTENT -->
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE CONTENT-->
+</div>
+
+
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/clockface/js/clockface.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="~/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="~/assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="~/assets/admin/pages/scripts/ui-blockui.js"></script>
+<script src="~/assets/admin/pages/scripts/components-form-tools.js"></script>
+<script src="~/assets/admin/pages/scripts/components-pickers.js"></script>
+
+<script src="https://kendo.cdn.telerik.com/2015.1.429/js/kendo.all.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2015.1.429/js/kendo.aspnetmvc.min.js"></script>
+
+
+<script id="client-template" type="text/kendo-tmpl">
+    @(Html.Kendo().Grid<Core.Dtos.MusteriTeklifDetayDTO>()
+            .Name("detayGrid_#=MasterID#")
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.id).ClientTemplate("#= id #").Visible(false);
+                columns.Bound(c => c.Marka).Title("BRAND").Width(100);
+                columns.Bound(c => c.UrunBarkodNo).Title("EAN CODE").Width(120);
+                columns.Bound(c => c.SKUKodu).Title("CODE").Width(150);
+                columns.Bound(c => c.StokIsmi).Title("NAME").Width(150);
+                columns.Bound(c => c.Renk).Title("COLOR").Width(150);
+                columns.Bound(c => c.StokAciklama).Title("DESCRIPTION").Width(150);
+                columns.Bound(c => c.Ozellik).Title("FEATURES").Width(200);
+                columns.Bound(c => c.Image64)
+                    .ClientTemplate(
+                    "<div class='row mix-grid' style='width:100px; height:120px'> " +
+                    "    <div class='col-md-3 col-sm-4 mix category_" + "\\#=id\\#" + "' style='display: block;opacity: 1; width:100px; height:120px'> " +
+                    "         <div class='mix-inner' id='\\#=id\\#' style='width:100px; height:120px'> " +
+                    "	          \\#=Image64\\# " +
+                    "         </div> " +
+                    "    </div> " +
+                    "</div> "
+                    ).Title("Image").Width(120).Filterable(f => f.Enabled(false));
+                columns.Bound(c => c.AlisFiyatiTL).Title("PRICE").Width(100);
+                columns.Bound(c => c.RetailFiyat).Title("RETAIL PRICE").Width(130);
+                columns.Bound(c => c.Miktar).Title("QUANTITY").Width(120);
+                columns.Bound(c => c.Iptal).Title("CANCEL").Width(100).ClientTemplate("<input type='checkbox' \\#= Iptal\\# ? 'checked= checked' : '' disabled='disabled' ></input>");
+        })
+            .Pageable().Sortable().Filterable().Selectable()
+            .Resizable(resize => resize.Columns(true))
+                                    .Scrollable(s => s.Height(400))
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Read(read => read.Action("MusteriTeklifDetayGetir", "MusteriTeklifleri", new { masterID = "#=MasterID#" }))
+                )
+            .Events(x => x.DataBound("onGridDataBound"))
+            .ToClientTemplate()
+    )
+
+</script>
+
+<script type="text/javascript">
+
+    
+    var totalRecords;
+    function RecordCount() {
+        var grid = $("#grdlist").data("kendoGrid");
+        var dataSource = grid.dataSource;
+        var recordsOnCurrentView = dataSource.view().length;
+        totalRecords = dataSource.total();
+
+        document.getElementById("spanRecordCount").innerHTML = totalRecords
+    }
+
+    function GetData() {
+        return { baslangicTarihi: $("#baslangicTarihi").val(), bitisTarihi: $("#bitisTarihi").val()};
+    }
+
+    jQuery(document).ready(function() {
+        RefreshData();
+        
+    });
+
+    function filtreTemizle() {
+        $('#baslangicTarihi').val('');
+        $('#bitisTarihi').val('');
+        RefreshData();
+        
+    };
+
+    $("#myLists").addClass('active');
+    $("#createList").removeClass('active');
+
+    function onGridDataBound(e) {
+        var list = document.getElementsByClassName("mix-details");
+        for(var i=0; i< list.length; i++)
+            if(list[i] && list[i].parentElement)
+                list[i].parentElement.removeChild(list[i]);
+
+        var data = this.dataSource.view();
+        if(data.length > 0) {
+            for (var i=0; i< data.length; i++) {
+                var id = data[i].id;
+                var imageName = data[i].StokIsmi;
+                
+                GetImageSeriesFromFolder(id,imageName);
+            }
+        }
+    }
+
+    function GetImageSeriesFromFolder(id,image) {
+        //image = imageName.split(" - ");
+        var formData = { imageName: image };
+        $.ajax({
+            type: "POST",
+            url: '/Kampanyalar/GetImageSeriesFromFolder',
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                $.each(data, function(i,filename) {
+                    $("#" + id).prepend("<div class='mix-details' style='width:90px; height:110px'>" +
+                                            "   <a class='mix-preview fancybox-button' rel='group_ " + id + "' style='margin-left:-20px; margin-top:35px' href='"+ filename +"' title='"+ filename.substring(7) +"'> " +
+                                            "     <i class='fa fa-search'></i> " +
+                                            "   </a> " +
+                                        "</div> "
+                                        );
+                    
+                });
+            },
+            error: function (response) {
+                //alert(JSON.stringify(response));
+                toastr["error"]("Show Image", "Unsuccessful");
+                //App.unblockUI();
+            }
+        });
+    }
+
+    var getFormatedDate = function (value) {
+        var d = new Date(value)
+        var datestring = d.toLocaleString().substring(0, d.toLocaleString().indexOf(' '));
+        return datestring;
+    }
+
+    var AciklamaFormatlayici = function (value) {
+        return value;
+    }
+
+    var RefreshData = function () {
+        var data = GetData();
+        $.ajax({
+            type: "POST",
+            url: '/MusteriTeklifleri/MusteriTeklifMasterGetir',
+            data: data,
+            dataType: 'json',
+            success: function (messsage) {
+                $('#grdlist').data('kendoGrid').dataSource.read();
+                $('#grdlist').data('kendoGrid').refresh();
+
+                RecordCount();
+            },
+            error: function () {
+
+            }
+        });
+    };
+
+    var expand = false;
+    $('#grdlist').on('click','tr',function(){
+        if(expand == false)
+        {
+            $('#grdlist').data().kendoGrid.expandRow($(this));
+            expand = true;
+        }
+        else
+        {
+            $('#grdlist').data().kendoGrid.collapseRow($(this));
+            expand = false;
+        }
+        
+    })
+
+    jQuery(document).ready(function() {
+        Metronic.init(); // init metronic core components
+        Layout.init(); // init current layout
+        QuickSidebar.init(); // init quick sidebar
+        Demo.init(); // init demo features
+        Portfolio.init();
+        Todo.init(); // init todo page
+        UIBlockUI.init();
+        UIExtendedModals.init();
+        ComponentsPickers.init();
+        
+        
+    });
+
+</script>

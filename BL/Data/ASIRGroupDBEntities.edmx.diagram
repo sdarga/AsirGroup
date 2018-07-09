@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0f6cdb1fa408490e962a366ad0715a53" Name="Diagram1">
+        <EntityTypeShape EntityType="ASIRGroupDBModel.CariKart" Width="1.5" PointX="3" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.DescriptionGecici" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.Kampanyalar" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.KampanyalarGecici" Width="1.5" PointX="9.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.Kategoriler" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.Konseptler" Width="1.5" PointX="9.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.KonseptlerGecici" Width="1.5" PointX="7.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.MusterilerGecici" Width="1.5" PointX="9.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.MusteriSiparisDetay" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.MusteriSiparisMaster" Width="1.5" PointX="5.25" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.MusteriTeklifDetay" Width="1.5" PointX="7.5" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.MusteriTeklifMaster" Width="1.5" PointX="5.25" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.Sirketler" Width="1.5" PointX="2.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.StokKarti" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.StokKartiTanim" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.WebKullanicilari" Width="1.5" PointX="4.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.MusteriTeklifDetayGecici" Width="1.5" PointX="11.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.MusteriTeklifDetayGeciciSil" Width="1.5" PointX="11.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.Sabitler" Width="1.5" PointX="13.75" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="ASIRGroupDBModel.FK_MusteriSiparisMaster_CariKart" ManuallyRouted="false" />
+        <AssociationConnector Association="ASIRGroupDBModel.FK_MusteriTeklifMaster_CariKart" ManuallyRouted="false" />
+        <AssociationConnector Association="ASIRGroupDBModel.FK_Kampanyalar_Kategoriler" ManuallyRouted="false" />
+        <AssociationConnector Association="ASIRGroupDBModel.FK_StokKarti_Kampanyalar" ManuallyRouted="false" />
+        <AssociationConnector Association="ASIRGroupDBModel.FK_MusteriSiparisDetay_MusteriSiparisMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="ASIRGroupDBModel.FK_MusteriSiparisDetay_StokKarti1" ManuallyRouted="false" />
+        <AssociationConnector Association="ASIRGroupDBModel.FK_MusteriTeklifDetay_MusteriTeklifMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="ASIRGroupDBModel.FK_TeklifDetay_TeklifMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="ASIRGroupDBModel.FK_StokKarti_StokKartiTanim" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.MusteriKampanyalari" Width="1.5" PointX="5.25" PointY="19.625" />
+        <AssociationConnector Association="ASIRGroupDBModel.FK_MusteriKampanyalari_CariKart" />
+        <EntityTypeShape EntityType="ASIRGroupDBModel.WebKullaniciYetkileri" Width="1.5" PointX="7" PointY="15.5" />
+        <AssociationConnector Association="ASIRGroupDBModel.FK_WebKullaniciYetkileri_WebKullanicilari" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

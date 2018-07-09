@@ -1,0 +1,1558 @@
+﻿@using WebUI.Controllers;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model BL.Data.MusteriKampanyalari
+
+<link href="~/Content/kendo/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Content/kendo/kendo.default.min.css" rel="stylesheet" />
+<link href="~/assets/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/jquery-multi-select/css/multi-select.css" rel="stylesheet" type="text/css" />
+<link href="~/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.css" />
+<link href="~/assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
+
+<link href="https://kendo.cdn.telerik.com/2015.1.429/styles/kendo.common-material.min.css" rel="stylesheet" type="text/css" />
+<link href="https://kendo.cdn.telerik.com/2015.1.429/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+<link href="https://kendo.cdn.telerik.com/2015.1.429/styles/kendo.material.min.css" rel="stylesheet" type="text/css" />
+
+
+<style>
+    /*#visu {
+        position:absolute;
+        width:95%;
+        left:-5px;
+        top:50px;
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:space-around;
+    }*/
+
+    .flex-item  {
+        /* position:absolute; */
+        display:table;
+        width:100%;
+        /*margin-bottom:30px;*/
+        height:120px;
+        /*margin-right:-20px;*/
+    }
+
+    .flex-item .name {
+        resize: none;
+        overflow:auto;
+        background-color: transparent !important; 
+        border:none;
+
+        display:table-cell;
+        padding: 40px 0px 40px 40px;*/ 
+        box-sizing:border-box;
+        width:200px;
+        height:120px;
+        text-align:left;
+        vertical-align:middle;
+    }
+
+    .fixle {
+        height: 300px;
+    }
+
+    .ms-container {
+        width: 90%;
+    }
+
+    .ms-optgroup-label {
+        color: red;
+    }
+
+    .ms-container .ms-optgroup-label {
+        color: red;
+    }
+
+    #grdlist .k-grid-content {
+        text-align:center
+    }
+    #grdTeklifMaster .k-grid-content {
+        text-align:center
+    }
+    #grdTeklifDetay .k-grid-content {
+        text-align:center
+    }
+
+    #grdlist th.k-header { text-align: center }
+
+    #grdTeklifDetay th.k-header { text-align: center }
+
+    #grdTeklifMaster th.k-header { text-align: center }
+
+    .k-grid .k-state-selected  {
+      background-color: #F9F9F9 !important;
+      color: #000000;
+    }
+ 
+    .k-grid .k-alt.k-state-selected {
+      background-color: #f1f1f1 !important;
+      color: #000000;
+    }
+    #grdTeklifMaster .k-grid td.k-state-selected:hover, .k-grid tr:hover {
+    color: #000000;
+    background-color: #F9F9F9;
+}
+
+    .textAreaClass{
+        resize: none;
+        text-align:center;
+        overflow:auto;
+        background-color: transparent !important; 
+        border:none;
+        width:200px; 
+        height:130px; 
+        vertical-align:middle; 
+    }
+
+</style>
+
+
+
+<!-- BEGIN PAGE CONTENT-->
+
+<ul class="nav nav-tabs">
+    <li id="li_1_1" class="active">
+        <a href="#tab_1_1" data-toggle="tab">
+            Products
+        </a>
+    </li>
+    <li id="li_1_2">
+        <a href="#tab_1_2" data-toggle="tab">
+            My Lists
+        </a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="tab_1_1">
+        <p>
+            <div class="portlet box grey-cascade">
+                
+                <div class="portlet-title">
+                    @*<div class="caption">                        
+                        <i class="fa fa-list"></i><b> PRODUCT LIST </b>
+                            <span class="pull-right" id="listSpan"> | Select the products to add to the new list and click on the Create button</span>
+                    </div>*@
+                    
+
+                    <div class="actions">
+                        <div class="input-group">
+                            <input id="txtFilter" class="form-control" type="text" placeholder="Search by name, description, code, features, color or concept" />
+                            <div class="input-group-btn">
+
+                                <button type="button" class="btn btn-default" onclick="seciliKampanyalariListele()">
+                                    <i class="fa fa-search icon-white"></i>Search
+                                </button>
+                                <button type="button" class="btn btn-default" onclick="filtreTemizle()"><i class="fa fa-times"></i> Clear</button>
+                                <span class="line-chart">
+                                </span>
+                                <a href="#responsive" class="btn btn-default" data-toggle="modal">
+                                    <i class="fa fa-pencil"></i><span id="createSpan"> Create</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portlet-body" >
+                    <div id="editListDiv" class="alert alert-warning hidden">
+                        <button type="button" class="close" onclick="urunEklemektenVazgec()"></button>
+                        <span style="text-align:center" id="listSpan"><i class="fa-lg fa fa-check"></i> Select the products to add to the new list and click on the Create button</span>
+                    </div>
+                    <form action="#" id="frmMusteriKampanyalariOlustur" method="POST">
+                        <div id="responsive" class="modal fade" tabindex="1" data-width="500">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 id="RequestModal" class="modal-title">Create a New List</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @*<p>
+                                            <div class="input-icon">
+                                                <i class="fa fa-code"></i>
+                                                @Html.TextBoxFor(m => m.MKampanyaKodu, new { id = "MKampanyaKodu", @class = "form-control", placeholder = "Kampanya Kodunu Giriniz.." })
+                                            </div>
+
+                                        </p>*@
+                                        <p>
+                                            <div class="input-icon">
+                                                <i class="fa fa-list"></i>
+                                                @Html.TextBoxFor(m => m.MKampanyaAdi, new { id = "MKampanyaAdi", @class = "form-control", placeholder = "Enter Your List Name" })
+                                            </div>
+
+                                        </p>
+                                        @*<p>
+                                            <div class="input-icon">
+                                                <i class="fa fa-calendar"></i>
+                                                @Html.TextBoxFor(m => m.Tarih1, new { id = "Tarih1", @class = "form-control todo-taskbody-due", placeholder = "Kampanya Başlangıç Tarihini Giriniz.." })
+                                            </div>
+
+                                        </p>
+                                        <p>
+                                            <div class="input-icon">
+                                                <i class="fa fa-calendar"></i>
+                                                @Html.TextBoxFor(m => m.Tarih2, new { id = "Tarih2", @class = "form-control todo-taskbody-due", placeholder = "Kampanya Bitiş Tarihini Giriniz.." })
+                                            </div>
+                                        </p>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                                <button id="createRequestButton" tabindex="1" type="button" class="btn blue" onclick="createNewRequest();">Create the List</button>
+                            </div>
+                        </div>
+                    </form>
+@*<div class="row mix-grid" style="width:0px; height:0px; visibility:hidden">
+    <div class="col-md-3 col-sm-4 mix category_1" style="width:0px; height:0px; ">
+        <div class="mix-inner" style="width:0px; height:0px">
+            <img style="width:0px; height:0px" src="~/assets/admin/pages/media/works/e0700araba_1_normal.jpg" alt="">
+            <div class="mix-details">
+                <a class="mix-preview fancybox-button" href="~/assets/admin/pages/media/works/img2.jpg" title="Project Name" data-rel="fancybox-button">
+                    <i class="fa fa-search"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>*@
+<div class="k-grid-content">
+    @(Html.Kendo().Grid<Core.Dtos.StokKartAramaWebDTO>()
+                                        .Name("grdlist")
+                                        .Columns(columns =>
+                                        {
+                                            columns.Template(c => c.id).Width(120).HtmlAttributes(new { style = "text-align:center;" })
+                                                .HeaderTemplate("<input id='selectall' class='make-switch'        type='checkbox' onchange='ToggleChkBox(this.checked);' data-on-color='danger' data-off-color='success' data-on-text='" + "None" + "' data-off-text='All'/>")
+                                                .ClientTemplate("<input id='#=SKUKodu#'  class='chkbxq form-control kampanyaID' type='checkbox' onchange='selectRow(this);' #= secim == 'var' ? 'checked= checked disabled' : '' # />");
+
+                                            columns.Bound(c => c.SKUKodu)
+                                            .ClientTemplate(
+                                                    "<div> " +
+                                                    "   <div class='selected'> " +
+                                                    "       <div style='cursor:pointer;' onclick='GetImageSeriesFromFolder(#=id#," + "\"#=SKUKodu#" + "\" );'> " +
+                                                    //"          <div class='hover01 column'>                                                                                         " +
+                                                    //"              <div><figure><img src='#=Image64#' /></figure></div>                                 " +
+                                                    //"          </div>" +
+                                                    //"             <img src='#=Image64#' />" +
+                                                    //"             <img src='ftp://images:Jz95xXDQ@ftp.asirgroupcloud.com/KucukResimler/abc.jpg' width:150px height:120px/>" +
+                                                    "             <img src='http://www.asirgroupcloud.com/Images/KucukResimler/#=getFormatedSKUKodu(SKUKodu)# - 1.jpg'/>" +
+                                                    "       </div> " +
+                                                    "   </div> " +
+                                                    "</div> ")
+                                                .Title("IMAGE").Width(180).Filterable(f => f.Enabled(false));
+                                            columns.Bound(c => c.UrunBarkodNo).Title("EAN CODE").Width(150)
+                                                                            .Filterable(ftb => ftb.Multi(true)
+                                                                            .Mode(GridFilterMode.Menu)
+                                                                            .Cell(cell => cell.Operator("contains").ShowOperators(false))
+                                                                            /*.DataSource(ds => ds.Read(r => r.Action("Unique", "Kampanyalar").Data("{ field: 'UrunBarkodNo' }")))*/);
+
+                                            columns.Bound(c => c.SKUKodu).Title("CODE").Width(150)
+                                                                            .Filterable(ftb => ftb.Multi(true)
+                                                                            .Mode(GridFilterMode.Menu)
+                                                                            .Cell(cell => cell.Operator("contains").ShowOperators(false))
+                                                                            /*.DataSource(ds => ds.Read(r => r.Action("Unique", "Kampanyalar").Data("{ field: 'SKUKodu' }")))*/);
+                                            columns.Bound(e => e.StokIsmi).Title("NAME").Width(150).Filterable(ftb => ftb.Multi(true).Cell(cell => cell.Operator("contains").ShowOperators(false))
+                                                                /*.DataSource(ds => ds.Read(r => r.Action("Unique", "Kampanyalar").Data("{ field: 'StokIsmi' }")))*/);
+
+                                            columns.Bound(c => c.Renk).Title("COLOR").Width(150).Encoded(false).ClientTemplate("#= changeNewLine(Renk) #")
+                                            .Filterable(ftb => ftb.Multi(true)
+                                                                        .Cell(cell => cell.Operator("contains").ShowOperators(false))
+                                                                        );
+                                            columns.Bound(c => c.StokAciklama).Title("DESCRIPTION").Width(150).Filterable(ftb => ftb.Multi(true).Cell(cell => cell.Operator("contains").ShowOperators(false)));
+                                            columns.Bound(c => c.Ozellik).Title("FEATURES").Width(250).Encoded(false).ClientTemplate("#= changeNewLine(Ozellik) #")
+                                                                         .Filterable(ftb => ftb.Multi(true).Cell(cell => cell.Operator("contains").ShowOperators(false)));
+                                            columns.Bound(c => c.En).Title("PACKAGING SIZE-X (cm)").Width(210);
+                                            columns.Bound(c => c.Boy).Title("PACKAGING SIZE-Y (cm)").Width(210);
+                                            columns.Bound(c => c.Yukseklik).Title("PACKAGING SIZE-Z (cm)").Width(210);
+                                            columns.Bound(c => c.Agirlik).Title("WEIGHT ").Width(180);
+
+                                        })
+                                        .Pageable()
+                                        .Sortable()
+                                        .AutoBind(false)
+                                        .Resizable(resize => resize.Columns(true))
+                                        //.Selectable()
+                                        .Scrollable(scrollable => scrollable.Virtual(false).Height(600))
+                                        //.Sortable()
+                                        .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+                                        .ColumnMenu()
+                                        .DataSource(dataSource => dataSource
+                                                .Ajax()
+                                                .PageSize(5000)
+                                                .ServerOperation(false)
+                                                .Read(read => read.Action("GetCampaignsFromSP", "Kampanyalar").Data("GetData")))
+    //.Events(x => x.DataBound("onGridDataBound"))
+
+    )
+
+
+</div>
+
+            </div>
+        </div>
+        </p>
+    </div>
+<div class="tab-pane fade" id="tab_1_2">
+    <p>
+        <div class="portlet box grey-cascade">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-list"></i>My Lists
+                </div>
+                @*<div class="actions">
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-sm" href="#" data-toggle="dropdown">
+                            <i class="fa fa-cogs"></i> Tools <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-pencil"></i> Edit
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-trash-o"></i> Delete
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-ban"></i> Ban
+                                </a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="i"></i> Make admin
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>*@
+            </div>
+            <div class="portlet-body">
+
+                @*<div class="row mix-grid" style="width:0px; height:0px; visibility:hidden">
+                    <div class="col-md-3 col-sm-4 mix category_1" style="width:0px; height:0px; ">
+                        <div class="mix-inner" style="width:0px; height:0px">
+                            <img style="width:0px; height:0px" src="~/assets/admin/pages/media/works/e0700araba_1_normal.jpg" alt="">
+                            <div class="mix-details">
+                                <a class="mix-preview fancybox-button" href="~/assets/admin/pages/media/works/img2.jpg" title="Project Name" data-rel="fancybox-button">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+                <div class="k-grid-content">
+                    @(Html.Kendo().Grid<Core.Dtos.MusteriTeklifMasterDTO>()
+                                    .Name("grdTeklifMaster")
+                                    .Columns(columns =>
+                                    {
+                                        columns.Bound(c => c.id).Width(100).Title("LIST NUMBER").ClientTemplate("#= MasterID #").Visible(true);//columns.Bound(c => c.KucukResim).Title("KucukResim").Width(100).ClientTemplate("<img src='data:image/png;base64," + "@System.Convert.ToBase64String(\"#=KucukResim#\")' />");
+                                        columns.Bound(c => c.MKampanyaAdi).Width(100).Title("LIST NAME").Visible(true);
+                                        columns.Bound(c => c.Tarih).Title("LIST DATE").Width(100).ClientTemplate(string.Format("{0}", "#= getFormatedDate(Tarih) #"));
+                                        //columns.Bound(c => c.MKampanyaKodu).Title("Campaign Code").Width(100).ClientTemplate(string.Format("{0}", "#= AciklamaFormatlayici(MKampanyaKodu) #"));
+
+                                        //columns.Bound(c => c.MKampanyaAdi).Title("Offer / Campaign Name").Width(200).ClientTemplate(string.Format("{0}", "#= AciklamaFormatlayici(MKampanyaAdi) #"));
+
+                                        //columns.Bound(c => c.MKampanyaTarih1).Title("Campaign Start Date").Width(120).ClientTemplate(string.Format("{0}", "#= getFormatedDate(MKampanyaTarih1) #"));
+                                        //columns.Bound(c => c.MKampanyaTarih2).Title("Campaign End Date").Width(120).ClientTemplate(string.Format("{0}", "#= getFormatedDate(MKampanyaTarih2) #"));
+
+                                        columns.Bound(c => c.id).Width(40).Title("STATUS").ClientTemplate("<div id='durum_#=MasterID#'>#= SatisFiyatiSorgula(MasterID) #</div>");
+                                        columns.Bound(c => c.id).Title("").ClientTemplate(
+                                       "<a id='duzenle_#=MasterID#' href='javascript:' onclick='MusteriTeklifMasterDuzenle(this,  \"#=MasterID#\",  \"#=MKampanyaAdi#\")' class='btn default purple' title='Add Product'><i class='fa fa-plus'>Add Product</i></a>" +
+                                       "<a id='sil_#=MasterID#' href='javascript:'onclick='MusteriTeklifMasterSil(this,  \"#=MasterID#\", \"#=MKampanyaAdi#\")'  class='btn default black' title='Delete'><i class='fa fa-trash-o'></i>Delete</a>").HeaderHtmlAttributes(new { @class = "col-md-2" }).HtmlAttributes(new { @class = "col-md-2" });
+
+
+                                        //columns.Bound(c => c.StokVerildi).Title("Stocked").Width(80).ClientTemplate("<input type='checkbox' #= StokVerildi ? 'checked= checked' : '' # disabled='disabled' ></input>");
+                                        //columns.Bound(c => c.SiparisiGeldi).Title("Ordered").Width(80).ClientTemplate("<input type='checkbox' #= SiparisiGeldi ? 'checked= checked' : '' # disabled='disabled' ></input>");
+                                        //columns.Bound(c => c.MusteriTeklifMaster.TeklifAdi).Title("TeklifAdi").Width(100).ClientTemplate(string.Format("{0}", "#= AciklamaFormatlayici(TeklifAdi) #"));
+
+                                    })
+                                    .Resizable(resize => resize.Columns(true))
+                                    .Selectable()
+                                    .Scrollable(s => s.Height(615))
+                                    .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            .Read(read => read.Action("MusteriTeklifMasterGetir", "MusteriTeklifleri")))
+                            //.Events(x => x.DataBinding("onGridDataBound"))
+                            .ClientDetailTemplateId("client-template")
+                            .AutoBind(false)
+                    )
+                </div>
+            </div>
+        </div>
+    </p>
+    
+</div>
+
+        </div>
+
+
+
+<!-- END PAGE CONTENT-->
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>*@
+<script src="~/Scripts/jquery.fancybox.js"></script>
+<script src="~/assets/global/plugins/jstree/dist/jstree.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+<script src="~/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="~/assets/admin/pages/scripts/ui-alert-dialog-api.js"></script>
+
+
+<script src="~/assets/admin/pages/scripts/ui-blockui.js"></script>
+<script src="~/assets/admin/pages/scripts/components-form-tools.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script src="https://kendo.cdn.telerik.com/2015.1.429/js/kendo.all.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2015.1.429/js/kendo.aspnetmvc.min.js"></script>
+
+
+<script id="client-template" type="text/kendo-tmpl">
+    @(Html.Kendo().Grid<Core.Dtos.MusteriTeklifDetayDTO>()
+            .Name("detayGrid_#=MasterID#")
+            .Columns(columns =>
+            {
+                //columns.Bound(c => c.Masterid).ClientTemplate("#= id #").Visible(false);
+                columns.Bound(c => c.id).Title("").Width(120).Filterable(f => f.Enabled(false)).ClientTemplate("<a href='javascript:'  onclick='MusteriTeklifDetaySil(\\#=id\\#," + "\"\\#=Masterid\\#\"" + " )'  class='icon-btn sil_#=MasterID#'><i class='fa fa-trash-o'></i><div>Delete</div></a>");
+                columns.Bound(c => c.Image64)
+                .ClientTemplate(
+                        "<div> " +
+                        "   <div class='selected'> " +
+                        "       <div style='cursor:pointer;' onclick='GetImageSeriesFromFolder(\\#=id\\#," + "\"\\#=SKUKodu\\#\"" + " );'> " +
+                        //"          <div class='hover01 column'>                                                                                         " +
+                        //"              <div><figure><img src='#=Image64#' /></figure></div>                                 " +
+                        //"          </div>" +
+                        "             <img src='http://www.asirgroupcloud.com/Images/KucukResimler/\\#=getFormatedSKUKodu(SKUKodu)\\# - 1.jpg'/>" +
+                        "       </div> " +
+                        "   </div> " +
+                        "</div> ")
+                    .Title("IMAGE").Width(180).Filterable(f => f.Enabled(false));
+                //columns.Bound(c => c.Marka).Title("BRAND").Width(100);
+                columns.Bound(c => c.UrunBarkodNo).Title("EAN CODE").Width(150)
+                                                .Filterable(ftb => ftb.Multi(true)
+                                                .Mode(GridFilterMode.Menu)
+                                                .Cell(cell => cell.Operator("contains").ShowOperators(false))
+                                                /*.DataSource(ds => ds.Read(r => r.Action("Unique", "Kampanyalar").Data("{ field: 'UrunBarkodNo' }")))*/);
+                columns.Bound(c => c.SKUKodu).Title("CODE").Width(150)
+                                                 .Filterable(ftb => ftb.Multi(true)
+                                                 .Mode(GridFilterMode.Menu)
+                                                 .Cell(cell => cell.Operator("contains").ShowOperators(false))
+                                                 /*.DataSource(ds => ds.Read(r => r.Action("Unique", "Kampanyalar").Data("{ field: 'SKUKodu' }")))*/);
+                columns.Bound(e => e.StokIsmi).Title("NAME").Width(150).Filterable(ftb => ftb.Multi(true).Cell(cell => cell.Operator("contains").ShowOperators(false))
+                                    /*.DataSource(ds => ds.Read(r => r.Action("Unique", "Kampanyalar").Data("{ field: 'StokIsmi' }")))*/);
+                columns.Bound(c => c.Renk).Title("COLOR").Width(150).ClientTemplate("\\#= changeNewLine(Renk) \\#").Filterable(ftb => ftb.Multi(true)
+                                            .Cell(cell => cell.Operator("contains").ShowOperators(false))
+                                            /*.DataSource(ds => ds.Read(r => r.Action("Unique", "Kampanyalar").Data("{ field: 'Renk' }")))*/);
+                columns.Bound(c => c.StokAciklama).Title("DESCRIPTION").Width(150)
+                                                  .Filterable(ftb => ftb.Multi(true).Cell(cell => cell.Operator("contains").ShowOperators(false)));
+                columns.Bound(c => c.Ozellik).Title("FEATURES").Width(200).Encoded(false).ClientTemplate("\\#= changeNewLine(Ozellik) \\#")
+                .Filterable(ftb => ftb.Multi(true).Cell(cell => cell.Operator("contains").ShowOperators(false)));
+
+                //columns.Bound(c => c.AlisFiyatiTL).Title("PRICE").Width(100).Filterable(f => f.Enabled(false));
+                //columns.Bound(c => c.RetailFiyat).Title("RETAIL PRICE").Width(130).Filterable(f => f.Enabled(false));
+                //columns.Bound(c => c.Miktar).Title("QUANTITY").Width(120).Filterable(f => f.Enabled(false));
+                columns.Bound(c => c.En).Title("PACKAGING SIZE-X (cm)").Width(220);
+                columns.Bound(c => c.Boy).Title("PACKAGING SIZE-Y (cm)").Width(220);
+                columns.Bound(c => c.Yukseklik).Title("PACKAGING SIZE-Z (cm)").Width(210);
+                columns.Bound(c => c.Agirlik).Title("WEIGHT (kg)").Width(180);
+                //columns.Bound(c => c.Iptal).Title("CANCEL").Width(100).ClientTemplate("<input type='checkbox' \\#= Iptal\\# ? 'checked= checked' : '' disabled='disabled' ></input>").Filterable(f => f.Enabled(false));
+
+            })
+
+            .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+            .ColumnMenu()
+            .Pageable().Sortable()
+            .Resizable(resize => resize.Columns(true))
+            .Scrollable(scrollable => scrollable.Virtual(true).Height(550))
+            .DataSource(dataSource => dataSource
+                .Ajax().PageSize(100)
+                .Read(read => read.Action("MusteriTeklifDetayGetir", "MusteriTeklifleri", new { masterID = "#=MasterID#" }))
+                )
+            //.Events(x => x.DataBound("onGridDataBound"))
+
+            .ToClientTemplate()
+    )
+
+</script>
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#txtFilter").pulsate({ color: "#09f", onHover: false, reach: 30 });
+        $(".k-pager-nav").addClass("hidden");
+        $(".k-pager-numbers").addClass("hidden");
+        
+    });
+    
+</script>
+
+<script type="text/javascript">
+    //Teklif sayfası ile ilgili JSler
+    var urunEklemektenVazgec = function () {
+        duzenle = false;
+
+        $('#txtFilter').val('');
+        $("#editListDiv").addClass('hidden');
+
+        document.getElementById('createSpan').innerHTML = 'Create';
+        document.getElementById('RequestModal').innerHTML = 'Create a New List';
+        //$("#tree").attr("disabled", true);
+        $("#MKampanyaAdi").attr("disabled", false);
+        $('#MKampanyaAdi').val('');
+        $("#createRequestButton").text("Create");;
+        $("#MKampanyaAdi").attr("placeholder", "Enter your list name");
+        //$('#responsive').modal('hide');
+    };
+
+    var MusteriTeklifMasterSil = function (dom, id, kampanyaAdi) {
+        swal({
+            title: "Are you sure?",
+            text: "If you delete this list, the products in the list will also be deleted. Once deleted, you will not be able to recover this list!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "POST",
+                    url: '/MusteriTeklifleri/MusteriTeklifMasterSil',
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (message) {
+                        //HTTP redirect
+                        if (message.Success == true) {
+                            $('#grdTeklifMaster').data('kendoGrid').dataSource.read();
+                            $('#grdTeklifMaster').data('kendoGrid').refresh()
+                        }
+
+                    },
+                    error: function () {
+
+                    }
+                });
+                swal("Your list and products in the list has been deleted!", {
+                    icon: "success",
+                });
+            } else {
+                swal("Your list and products in the list is safe!");
+            }
+        });
+
+    }
+
+    var MusteriTeklifDetaySil = function (id, Masterid) {
+        $.ajax({
+            type: "POST",
+            url: '/MusteriTeklifleri/SatisFiyatiSorgula',
+            data: { masterID: Masterid },
+            dataType: 'json',
+            success: function (response) {
+                if (JSON.stringify(response) === "false") {
+                    swal({
+                        title: "Are you sure?",
+                        text: "Once deleted, you will not be able to recover this product!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                type: "POST",
+                                url: '/MusteriTeklifleri/MusteriTeklifDetaySil',
+                                data: { id: id },
+                                dataType: 'json',
+                                success: function (message) {
+                                    //HTTP redirect
+                                    if (message.Success == true) {
+                                        $("#detayGrid_" + Masterid).data('kendoGrid').dataSource.read();
+                                        $("#detayGrid_" + Masterid).data('kendoGrid').refresh()
+                                    }
+
+                                },
+                                error: function () {
+
+                                }
+                            });
+                            swal("Your product has been deleted!", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("Your product is safe!");
+                        }
+                    });
+                }
+                else {
+                    swal({
+                        title: "WARNING",
+                        text: "You can not delete any product from a list that is Inprogress status",
+                        icon: "warning",
+                        //buttons: true,
+                        dangerMode: true,
+                    })
+                    return;
+                }
+            },
+            error: function (response) {
+                alert("hata : " + response);
+
+            }
+        });        
+
+    }
+
+    var duzenle = false;
+    var musteriTeklifMasterId = 0;
+    var MusteriTeklifMasterDuzenle = function (dom, id, kampanyaAdi) {
+        musteriTeklifMasterId = id;
+        duzenle = true;
+
+        $("#tab_1_2").removeClass('active in');
+        $("#tab_1_1").addClass('active in');
+        $("#li_1_2").removeClass('active');
+        $("#li_1_1").addClass('active');
+
+        $("#editListDiv").removeClass('hidden');
+        $('#txtFilter').val('');
+
+        document.getElementById('listSpan').innerHTML = "<i class='fa-lg fa fa-warning'></i> You are currently working on the <b>" + kampanyaAdi + "</b> list. Select the products to add to the <b>" + kampanyaAdi + "</b> list and click <b>Add to List</b> button. If you want to quit adding products to the list and create a new list, click <b>X</b> button on the right.";
+        document.getElementById('createSpan').innerHTML = 'Add to list';
+        document.getElementById('RequestModal').innerHTML = 'Add Products to ' + kampanyaAdi + ' list';
+        //$("#tree").attr("disabled", true);
+        $("#MKampanyaAdi").attr("disabled", true);
+        $("#MKampanyaAdi").val('');
+        $("#createRequestButton").text("Add to List");;
+        $("#MKampanyaAdi").attr("placeholder", "You are adding products to " + kampanyaAdi + " list");
+
+
+
+        //KampanyalarGecici tablosuna kayıt yapılacak ve listeyi stokaramaweb prosedüründen gelen veriyle dolduracak fonksiyon çağrılacak
+
+        //DuzenlenecekListeyeAitUrunleriGetir(id);
+
+        //arama tree sindeki nodeları tiklemek için kampanyaidlerini ve listede seçilen ürünleri tiklemek için SKUKodu alanlarını getirecek fonksiyon çağrılacak
+    }
+
+    var SKUKodlari = [];
+    var DuzenlenecekListeyeAitUrunleriGetir = function (masterid) {
+        $('#tree').jstree('deselect_all');
+        $.ajax({
+            type: "POST",
+            url: '/Kampanyalar/DuzenlenecekListeyeAitUrunleriGetir',
+            data: { masterID: masterid},
+            dataType: 'json',
+            success: function (message) {
+                SKUKodlari = message.Kodlar;
+                for (index = 0; index < message.IDler.length; ++index) {
+                    //$('.jstree').jstree(true).select_node(message[0]);
+                    //alert("'$" + message[index] + "'")
+                    if (index > 0 && message.IDler[index] === message.IDler[index - 1]) { continue; }
+                    $('.jstree').jstree(true).select_node(message.IDler[index]);
+
+                    //$('#tree').jstree('select_node', message[index]);
+                }
+
+            },
+            error: function () {
+                alert("hata");
+            }
+        });
+        seciliKampanyalariListele(true, masterid);
+    }
+
+    var SatisFiyatiSorgula = function (obj) {
+        var durum = "";
+        var formData = { masterID: JSON.stringify(obj) };
+        $.ajax({
+            type: "POST",
+            url: '/MusteriTeklifleri/SatisFiyatiSorgula',
+            data: formData,
+            dataType: 'json',
+            success: function (response) {
+                if (JSON.stringify(response) === "false") {
+                    durum = "<span id='span_" + obj + "' class='label label-sm label-success'>Awaiting</span>";
+                    $("#span_" + obj).remove();
+                    $("#durum_" + obj).prepend(durum);
+                    $("#duzenle_" + obj).attr("enabled", "true");
+                    $("#sil_" + obj).attr("enabled", "true");
+                }
+                else {
+                    durum = "<span id='span_" + obj + "' class='label label-sm label-danger'>Inprogress</span>";
+                    $("#span_" + obj).remove();
+                    $("#durum_" + obj).prepend(durum);
+                    $("#duzenle_" + obj).attr("disabled", "true");
+                    $("#sil_" + obj).attr("disabled", "true");
+                    $(".sil_" + obj).attr("disabled", "true");
+                }
+            },
+            error: function (response) {
+                alert("hata : " + response);
+
+            }
+        });
+        //$("#durum_"+obj).prepend(durum);
+        return durum;
+    }
+
+    var SatisFiyatiSorgula2 = function (obj) {
+        var durum = "";
+        var formData = { masterID: obj };
+        $.ajax({
+            type: "POST",
+            url: '/MusteriTeklifleri/SatisFiyatiSorgula',
+            data: formData,
+            dataType: 'json',
+            success: function (response) {
+                durum = JSON.stringify(response);
+                alert(durum);
+            },
+            error: function (response) {
+                alert("hata : " + response);
+
+            }
+        });
+        return durum;
+    }
+
+    var getFormatedDate = function (value) {
+        var d = new Date(value)
+        var datestring = d.toLocaleString().substring(0, d.toLocaleString().indexOf(' '));
+        return datestring;
+    }
+
+    var getFormatedSKUKodu = function (value) {
+        var SKUKodu = value.toLocaleString().substring(0, value.toLocaleString().indexOf(' - '));
+        if (SKUKodu === "") {
+            return value;
+        }
+        else {
+            return SKUKodu;
+        }
+        
+    }
+
+        var AciklamaFormatlayici = function (value) {
+            return value;
+        }
+
+    var RefreshTeklifData = function () {
+        //var data = GetData();
+        $.ajax({
+            type: "POST",
+            url: '/MusteriTeklifleri/MusteriTeklifMasterGetir',
+            //data: data,
+            dataType: 'json',
+            success: function (messsage) {
+                $('#grdTeklifMaster').data('kendoGrid').dataSource.read();
+                $('#grdTeklifMaster').data('kendoGrid').refresh();
+
+                //RecordCount();
+            },
+            error: function () {
+
+            }
+        });
+    };
+
+    var totalRecords;
+    function RecordCount() {
+        var grid = $("#grdTeklifMaster").data("kendoGrid");
+        var dataSource = grid.dataSource;
+        var recordsOnCurrentView = dataSource.view().length;
+        totalRecords = dataSource.total();
+
+        document.getElementById("spanRecordCount").innerHTML = totalRecords
+    }
+
+    var expand = false;
+    $('#grdTeklifMaster').on('click', 'tr', function () {
+        if (expand == false) {
+            $('#grdTeklifMaster').data().kendoGrid.expandRow($(this));
+            expand = true;
+        }
+        else {
+            $('#grdTeklifMaster').data().kendoGrid.collapseRow($(this));
+            expand = false;
+        }
+
+    })
+
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href") // activated tab
+            if (target == "#tab_1_2")
+            {
+                RefreshTeklifData();
+            }
+        });
+
+        function changeNewLine(text) {
+            var regexp = "/<br\s*[\/]?>/gi";
+            var sonuc = text.replace(/\n/g, '<br />');
+            return sonuc;
+        }
+
+        function onGridDataBound(e) {
+            for (var i = 0; i < this.columns.length; i++) {
+                this.autoFitColumn(i);
+            }
+
+            //if (duzenle == true)
+            //{
+            //    for (index = 0; index < SKUKodlari.length; ++index) {
+            //        var input = document.getElementById(SKUKodlari[index]);
+            //        //$('#' + SKUKodlari[index]).attr('checked', true);
+            //    }
+            //}
+        }
+
+    //Kampanya Sayfası ile ilgili JSler
+
+        function GetData() {
+            return { seciliKampanyalar: JSON.stringify(items), filtre: $("#txtFilter").val(), isEdit: duzenle, masterID: masterid };
+        }
+
+    $("#createList").addClass('active');
+    $("#myLists").removeClass('active');
+
+    DisplayNoResultsFound();
+
+    treeViewDoldur();
+
+    function filtreTemizle() {
+        $('#txtFilter').val('');
+        RefresData(items, $('#txtFilter').val());
+    };
+
+    function GetImageSeriesFromFolder(id, image) {
+        var resimEkle = "";
+        var imageName = image.split(" - ");
+        var formData = { imageName: imageName[0] };
+        //$.blockUI({ css: {
+        //    border: 'none',
+        //    padding: '15px',
+        //    backgroundColor: '#000',
+        //    '-webkit-border-radius': '10px',
+        //    '-moz-border-radius': '10px',
+        //    opacity: .5,
+        //    color: '#fff'
+        //} });
+
+        Metronic.startPageLoading('Please wait...');
+
+        $.ajax({
+            type: "POST",
+            url: '/Kampanyalar/GetImageSeriesFromFolder',
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                $.each(data, function (i, filename) {
+                    resimEkle = resimEkle + "<a id='image_" + i + "' data-fancybox='images' href='" + filename + "' data-caption='" + filename.substring(7) + "' title='" + filename.substring(7) + "'><img height='100' width='100' src='" + filename + "' /> </a> ";
+                });
+                //$.unblockUI();
+                Metronic.stopPageLoading();
+                $.fancybox.open(resimEkle);
+                $("#image_0").trigger('click');
+            },
+            error: function (response) {
+                //alert(JSON.stringify(response));
+                toastr["error"]("Show Image", "Unsuccessful");
+                //App.unblockUI();
+            }
+        });
+    }
+
+    function DisplayNoResultsFound() {
+            $("#grdlist").find('.k-grid-content tbody')
+                .append('<tr class="kendo-data-row"><td colspan="' + 8 + '" style="text-align:left;">                ' +
+                '<table class="table table-bordered table-striped">                                                  ' +
+						'		<tr>                                                                                 ' +
+						'			<td>                                                                             ' +
+						'				<div id="pulsate-regular" style="padding:5px;">                              ' +
+                        '                 <i class="fa fa-arrow-left fa-x"></i>                                      ' +
+						'				  <span style="color:gray; font-size:14px"><b>Select products from the list on the left collapsible pane or Enter the word you want to find to the search area above and then Click the search button<b></span>' +
+						'				</div>                                                                       ' +
+						'			</td>                                                                            ' +
+						'		</tr>                                                                                ' +
+						'		</table>' +
+                '</td></tr>');
+    }
+
+    function treeViewDoldur() {
+        $("#tree").jstree({
+            "core": {
+                "themes": {
+                    "responsive": false
+                },
+                "check_callback": true,
+                'data': {
+                    'url': function (node) {
+                        return "/Kampanyalar/KampanyaTreeDoldur";
+                    },
+                    'data': function (node) {
+                        return { 'parent': node.id };
+                    }
+                }
+            },
+            "types": {
+                "types": {
+                    "disabled": {
+                        "check_node": false,
+                        "uncheck_node": false
+                    }
+                }
+            },
+            "state": { "key": "demo3" },
+            "plugins": ["json_data", "checkbox", "ui", "themes", "search"],
+            "search": { "show_only_matches": true }
+        })
+    };
+
+    function secimikaldirKampanyalar() {
+        $('#tree').jstree('deselect_all');
+        //RefresData(items, $('#txtFilter').val());
+    };
+
+    function tumunuSecKampanyalar() {
+        $('#tree').jstree("check_all");
+    }
+
+    function secimikaldirDescription() {
+        $('#treeDescription').jstree('deselect_all');
+        //RefresData(items, $('#txtFilter').val());
+    };
+
+    function tumunusecDescription() {
+        $('#treeDescription').jstree("check_all");
+    }
+
+
+    $('#tree').on("changed.jstree", function (e, data) {
+
+        var selectedCampaigns = {};
+        selectedCampaigns = $('#tree').jstree('get_selected');
+
+        //var i, j, selectedCampaigns = [];
+        //for (i = 0, j = data.selected.length; i < j; i++) {
+        //    selectedCampaigns.push(data.instance.get_node(data.selected[i]).id);
+        //}
+
+        //if (selectedCampaigns.length == 0) {
+        //    $('#grdDescription').data('kendoGrid').dataSource.data([]);
+        //    $('#grdDescription').data('kendoGrid').refresh();
+        //    return false;
+        //}
+
+        KampanyalarGeciciKaydet(selectedCampaigns, duzenle);
+        //RefresDescriptionData();
+    });
+
+    var pasiflikAyarlaCalissinmi = false;
+    $('#treeDescription').on("changed.jstree", function (e, data) {        
+        if (pasiflikAyarlaCalissinmi === true) {
+            var selectedDescriptions = {};
+            selectedDescriptions = $('#treeDescription').jstree('get_selected');
+
+            var i, j, selectedDescriptions = [];
+            for (i = 0, j = data.selected.length; i < j; i++) {
+                selectedDescriptions.push(data.instance.get_node(data.selected[i]).id);
+            }
+
+            PasiflikAyarla(selectedDescriptions);
+        }
+        pasiflikAyarlaCalissinmi = false;
+    });
+
+    $('#treeDescription').on("select_node.jstree", function (e, data) {        
+        pasiflikAyarlaCalissinmi = true;
+        
+    });
+
+    $('#treeDescription').on("deselect_node.jstree", function (e, data) {        
+        pasiflikAyarlaCalissinmi = true;
+    });
+
+    var enteraBasildi = false;
+    var to = false;
+    $('#treeSearch').keyup(function (e) {
+        if (to) { clearTimeout(to); }
+        to = setTimeout(function () {
+            var v = $('#treeSearch').val();
+            $('#tree').jstree(true).search(v);
+
+        }, 250);
+        $('#treeSearch').val($(this).val());
+
+
+
+        $("#tree").bind("after_open.jstree", function (event, data) {
+            $.each(data.instance._model.data, function (i) {
+                if (data.instance._model.data[i].id.startsWith("*")) {
+                    if (!data.instance._model.data[i].original.template)
+                        if ($('#treeSearch').val().length != "")
+                            $("#tree").jstree("disable_node", data.instance._model.data[i].id);
+                        else
+                            $("#tree").jstree("enable_node", data.instance._model.data[i].id);
+                }
+            })
+        })
+
+        if (e.which === 13)
+        {
+            seciliKampanyalariListele();
+
+            enteraBasildi = true;
+        }
+    });
+
+    $('#txtFilter').keypress(function (e) {
+        $("#txtFilter").pulsate("destroy");
+    });
+
+    $('#MKampanyaAdi').keyup(function (e) {
+        //if ($("#txtFilter").val() == "")
+        //{
+        //    $("#txtFilter").pulsate({ color: "#09f", onHover: false, reach: 30 });
+        //}
+        if (e.which === 13) {
+
+            createNewRequest();
+
+            enteraBasildi = true;
+        }
+        //$("#blockui_sample_1_portlet_body").unblock();
+    });
+
+    $('#txtFilter').keyup(function (e) {
+        //if ($("#txtFilter").val() == "")
+        //{
+        //    $("#txtFilter").pulsate({ color: "#09f", onHover: false, reach: 30 });
+        //}
+        if (e.which === 13) {
+
+            seciliKampanyalariListele();
+
+
+            enteraBasildi = true;
+        }
+        //$("#blockui_sample_1_portlet_body").unblock();
+    });
+
+    function DisableEnterKey(e) {
+        var key;
+        if (window.event)
+            key = window.event.keyCode; //IE
+        else
+            key = e.which; //firefox
+
+        return (key != 13);
+    }
+
+    var items = [];
+    var masterid = 0;
+    var seciliKampanyalariListele = function (isEdit, masterId) {
+        checkedrows = {};
+
+        masterid = masterId;
+        var selectedCampaigns = {};
+        selectedCampaigns = $('#tree').jstree('get_selected');
+        items = [];
+        for (var i = 0; i < selectedCampaigns.length; i++) {
+            if (selectedCampaigns[i].startsWith('*')) continue;
+            if (!items.includes(selectedCampaigns[i]))
+                items.push(selectedCampaigns[i]);
+        }
+
+        //if (selectedCampaigns.length == 0) {
+        //    toastr.options = {
+        //        "closeButton": true,
+        //        "debug": false,
+        //        "positionClass": "toast-top-left",
+        //        "onclick": null,
+        //        "showDuration": "1000",
+        //        "hideDuration": "1000",
+        //        "timeOut": "5000",
+        //        "extendedTimeOut": "1000",
+        //        "showEasing": "swing",
+        //        "hideEasing": "linear",
+        //        "showMethod": "fadeIn",
+        //        "hideMethod": "fadeOut"
+        //    }
+        //    toastr["warning"]("You can not search without selecting a product from the list", "WARNING");
+        //    return false;
+        //}
+
+        //KampanyalarGeciciKaydet(selectedCampaigns);
+
+        RefresData(items, $("#txtFilter").val(), duzenle, masterId);
+
+        selectedCampaigns = {};
+        return false;
+    };
+
+    var KampanyalarGeciciKaydet = function (obj1, obj2) {
+        //if (obj1.length === 0) return false;
+        var formData = { selectedCampaigns: JSON.stringify(obj1), isEdit: obj2 };
+        $.ajax({
+        type: "POST",
+            url: '/Kampanyalar/KampanyalarGeciciKaydet',
+            data: formData,
+            dataType: 'json',
+            success: function (message) {
+                    RefresDescriptionData();
+                    },
+            error: function () {
+                toastr["error"]("Unsuccessfull", "Unsuccessfull");
+            }
+        });
+    };
+
+    var KampanyalarGeciciSil = function (obj) {
+        var formData = { selectedCampaigns: JSON.stringify(obj) };
+        $.ajax({
+            type: "POST",
+            url: '/Kampanyalar/KampanyalarGeciciSil',
+            data: formData,
+            dataType: 'json',
+            success: function (message) {
+                toastr["info"]("", message.Message);
+            },
+            error: function () {
+                toastr["error"]("Unsuccessfull", "Unsuccessfull");
+            }
+        });
+    };
+
+    var DescriptionGetir = function (obj) {
+        //App.blockUI();
+        var formData = { selectedCampaigns: JSON.stringify(obj) };
+        $.ajax({
+            type: "POST",
+            url: '/Kampanyalar/DescriptionGetir',
+            data: formData,
+            dataType: 'json',
+        });
+    };
+
+    var PasiflikAyarla = function (obj1)
+    {
+        var formData = { selectedDescriptions: JSON.stringify(obj1) };
+        $.ajax({
+            type: "POST",
+            url: '/Kampanyalar/PasiflikAyarla',
+            data: formData,
+            dataType: 'json',
+            success: function (messsage) {
+                //$('#grdDescription').data('kendoGrid').dataSource.read();
+                //$('#grdlist').data('kendoGrid').refresh();
+            },
+            error: function () {
+
+            }
+        });
+    };
+
+    var DescriptionGeciciKaydet = function (obj) {
+        //App.blockUI();
+        var formData = { selectedCampaigns: JSON.stringify(obj) };
+        $.ajax({
+            type: "POST",
+            url: '/Kampanyalar/DescriptionGeciciKaydet',
+            data: formData,
+            dataType: 'json',
+            success: function (message) {
+                //HTTP redirect
+                //App.unblockUI();
+                switch (message.Type) {
+                    case 1:
+                        if (message.Success == true) {
+                            toastr["info"]("", message.Message);
+                            //RefresData(items, $('#txtFilter').val());
+                        }
+                        break;
+                    default:
+                        if (message.Success == true) {
+                            toastr["error"]("Unsuccessfull", message.Message);
+                        }
+                }
+            },
+            error: function () {
+                toastr["error"]("Unsuccessfull", "Unsuccessfull");
+                //App.unblockUI();
+            }
+        });
+    };
+
+    var RefresData = function (obj1, obj2, obj3, obj4) {
+        //Metronic.startPageLoading('Please wait...');
+        //$.blockUI({
+        //    css: {
+        //        border: 'none',
+        //        padding: '15px',
+        //        backgroundColor: '#000',
+        //        '-webkit-border-radius': '10px',
+        //        '-moz-border-radius': '10px',
+        //        opacity: .5,
+        //        color: '#fff'
+        //    }
+        //});
+
+        $("#grdlist").data("kendoGrid").setDataSource($("#grdlist").data("kendoGrid").dataSource);
+        $('#grdlist').data('kendoGrid').dataSource.read();
+
+        //var formData = { seciliKampanyalar: JSON.stringify(obj1), filtre: $("#txtFilter").val(), isEdit: obj3, masterID: obj4 };
+        //$.ajax({
+        //    type: "POST",
+        //    url: 'Kampanyalar/GetCampaignsFromSP',
+        //    data: formData,
+        //    dataType: 'json',
+        //    success: function (messsage) {
+        //        //Metronic.stopPageLoading();
+        //        //alert(JSON.stringify(messsage));
+        //        $("#grdlist").data("kendoGrid").setDataSource($("#grdlist").data("kendoGrid").dataSource);
+        //        $('#grdlist').data('kendoGrid').dataSource.read();
+        //        //$('#grdlist').data('kendoGrid').refresh();
+        //        $.unblockUI();
+        //    },
+        //    error: function () {
+        //        alert(JSON.stringify(messsage));
+        //    }
+        //});
+
+       
+
+    };
+
+    //var RefresDescriptionData = function () {
+    //    $.ajax({
+    //        type: "POST",
+    //        url: 'Kampanyalar/DescriptionGetir',
+    //        dataType: 'json',
+    //        success: function (messsage) {
+    //            $('#grdDescription').data('kendoGrid').dataSource.read();
+    //            $('#grdDescription').data('kendoGrid').refresh();
+    //        },
+    //        error: function () {
+
+    //        }
+    //    });
+    //};
+
+    $("a[href='#tab_5_2']").on('shown.bs.tab', function (e) {
+        //$('#treeDescription').jstree("check_all");
+    });
+
+    var RefresDescriptionData = function () {
+        //$('#treeDescription').jstree("destroy").empty();
+        $("#treeDescription").jstree({
+            "core": {
+                "themes": {
+                    "responsive": false
+                },
+                "check_callback": true,
+                'data': {
+                    'url': function (node) {
+                        return "/Kampanyalar/DescriptionGetir";
+                    },
+                    'data': function (node) {
+                        return { 'parent': node.id };
+                    }
+                }
+            },
+            "types": {
+                "types": {
+                    "disabled": {
+                        "check_node": false,
+                        "uncheck_node": false
+                    }
+                }
+            },
+            "state": { "key": "demo3" },
+            "plugins": ["json_data", "checkbox", "ui", "themes", "search"],
+            "callback": {
+                onload: function (tree) {
+                    $('li[selected=true]').each(function () {
+                        $.tree.plugins.checkbox.check(this);
+                    });
+                }
+            },
+            "search": { "show_only_matches": true }
+        });
+        
+        $("#treeDescription").jstree(true).load_node('#');
+        //$('#treeDescription').jstree(true).refresh();        
+    };
+
+    var MusteriTeklifleriGetir = function () {
+        //App.blockUI();
+        $("#tab_1_1").removeClass('active in');
+        $("#tab_1_2").addClass('active in');
+        $("#li_1_1").removeClass('active');
+        $("#li_1_2").addClass('active');
+        $('#responsive').modal('hide');
+        RefreshTeklifData();
+        //window.location.href = '/MusteriTeklifleri/Index'
+    };
+
+    $('#selectall').change(function () {
+        var selectedTd = $(e.target).closest("td");
+        var grdChkBox = selectedTd.parents('tr').find("td:first").next("td").find('input:#selectall');
+        grdChkBox.prop('checked', !grdChkBox.prop('checked'));
+
+    });
+
+    var checkedrows = {};
+    function ToggleChkBox(flag) {
+        $('.chkbxq').each(function () {
+            $(this).attr('checked', flag);
+
+            var checked = $(this).attr('checked');
+            row = $(this).closest("tr"),
+		    grid = $("#grdlist").data("kendoGrid"),
+		    dataItem = grid.dataItem(row);
+
+            checkedrows[dataItem.uid] = checked;
+
+            });
+        }
+
+    function selectRow(item) {
+        var checked = item.checked,
+	    row = item.closest("tr"),
+	    grid = $("#grdlist").data("kendoGrid"),
+	    dataItem = grid.dataItem(row);
+
+        checkedrows[dataItem.uid] = checked;
+    }
+
+    var checkedrowsForDescription = {};
+    function ToggleChkBoxforDescription(flag) {
+        $('.chkbxDescription').each(function () {
+            $(this).attr('checked', flag);
+
+            var checked = $(this).attr('checked');
+            row = $(this).closest("tr"),
+		    grid = $("#grdDescription").data("kendoGrid"),
+		    dataItem = grid.dataItem(row);
+
+            checkedrowsForDescription[dataItem.uid] = checked;
+
+        });
+    }
+
+
+    $('#descriptionSearch').keyup(function (e) {
+        if (to) { clearTimeout(to); }
+        to = setTimeout(function () {
+            var v = $('#descriptionSearch').val();
+            $('#treeDescription').jstree(true).search(v);
+
+        }, 250);
+        $('#descriptionSearch').val($(this).val());
+
+
+
+        $("#treeDescription").bind("after_open.jstree", function (event, data) {
+            $.each(data.instance._model.data, function (i) {
+                if (data.instance._model.data[i].id.startsWith("*")) {
+                    if (!data.instance._model.data[i].original.template)
+                        if ($('#descriptionSearch').val().length != "")
+                            $("#treeDescription").jstree("disable_node", data.instance._model.data[i].id);
+                        else
+                            $("#treeDescription").jstree("enable_node", data.instance._model.data[i].id);
+                }
+            })
+        })
+
+        if (e.which === 13) {
+            seciliKampanyalariListele();
+
+            enteraBasildi = true;
+        }
+    });
+
+    //$('#descriptionSearch').keyup(function (e) {
+    //    var value = $('#descriptionSearch').val(),
+	//	grid = $("#grdDescription").data("kendoGrid");
+
+    //    if (value) {
+    //        grid.dataSource.filter({ field: "StokAciklama", operator: "contains", value });
+    //    } else {
+    //        grid.dataSource.filter({});
+    //    }
+    //});
+
+    function descriptionSearchTemizle() {
+        $('#descriptionSearch').val('');
+    }
+
+    $(function () {
+        var grid = $("#grdDescription");
+        grid.find(".k-grid-toolbar").on("click", ".k-pager-refresh", function (e) {
+            e.preventDefault();
+            grid.data("kendoGrid").dataSource.read();
+        });
+
+    });
+
+    function categoriesChange() {
+        var value = this.value(),
+		 	 grid = $("#grdDescription").data("kendoGrid");
+
+        if (value) {
+            grid.dataSource.filter({ field: "Kategoriid", operator: "eq", value: parseInt(value) });
+        } else {
+            grid.dataSource.filter({});
+        }
+    }
+
+    
+
+    function selectRowforDescription(item) {
+        var checked = item.checked,
+	    row = item.closest("tr"),
+	    grid = $("#grdDescription").data("kendoGrid"),
+	    dataItem = grid.dataItem(row);
+
+        checkedrowsForDescription[dataItem.uid] = checked;
+    }
+
+    function DescriptionFilter() {
+
+        var selectedCampaigns = {};
+        selectedCampaigns = $('#tree').jstree('get_selected');
+        items = [];
+        for (var i = 0; i < selectedCampaigns.length; i++) {
+            if (selectedCampaigns[i].startsWith('*')) continue;
+            if (!items.includes(selectedCampaigns[i]))
+                items.push(selectedCampaigns[i].substring(1));
+        }
+
+        RefresData(items, $('#txtFilter').val());
+
+
+        //return false;
+        //return JSON.stringify(items);
+    }
+
+    function KampanyalariFiltrele() {
+        RefresData(items, $('#txtFilter').val());
+
+        //return false;
+        //return JSON.stringify(items);
+    }
+
+    function createNewRequest() {
+        var items = [],
+            item,
+            grid = $("#grdlist").data("kendoGrid");
+
+		for (var uid in checkedrows) {
+            if (checkedrows.hasOwnProperty(uid)) {
+                if (checkedrows[uid]) {
+                    item = grid.dataSource.getByUid(uid);
+                    items.push(item.id);
+                }
+            }
+		}
+
+		
+
+		if (duzenle == false && $("#MKampanyaAdi").val() == "")
+		{
+		    toastr["warning"]("You must enter a name for your list..!", "Input Warning");
+		    return false;
+		}
+
+		if (items.length === 0)
+		{
+		    toastr["warning"]("You have not selected any products. You must select at least one product for your list..!", "Input Warning");
+		    return false;
+		}
+
+		if(duzenle == true)
+		{
+		    MusteriKampanyaTeklifiDuzenle(musteriTeklifMasterId, items);
+		    checkedrows = {};
+
+		}
+		else
+		{
+		    MusteriKampanyaTeklifiOlustur(items);
+		    checkedrows = {}
+		    ToggleChkBox(false);
+		}
+		$('#responsive').modal('hide');
+		$("#MKampanyaAdi").val("");
+		$("#MKampanyaAdi").attr("disabled", false);
+
+        //MusteriTeklifleriGetir();
+
+        return false;
+        //return JSON.stringify(items);
+    }
+
+
+    var MusteriKampanyaTeklifiOlustur = function (items) {
+
+        var musteriKampnyalari = {};
+        musteriKampnyalari.Sirket_Kod = "1";
+        //musteriKampnyalari.MKampanyaKodu = $("#MKampanyaKodu").val() ;
+        musteriKampnyalari.MKampanyaAdi = $("#MKampanyaAdi").val();
+        musteriKampnyalari.Musteriid = '@Session["userID"]';
+        //musteriKampnyalari.Tarih1 = $("#Tarih1").val();
+        //musteriKampnyalari.Tarih2 = $("#Tarih2").val();
+        musteriKampnyalari.Aktif = "true";
+        musteriKampnyalari.KullaniciKodu = '@Session["WebKullaniciNo"]'; 
+        musteriKampnyalari.DegKullaniciKodu = '@Session["WebKullaniciNo"]';
+
+        var formData = { seciliKampanyalar: JSON.stringify(items), musteriKampanyalari: JSON.stringify(musteriKampnyalari) };
+	    $.ajax({
+                type: "POST",
+                url: '/MusteriTeklifleri/MusteriKampanyaTeklifiOlustur',
+	            data: formData,
+	            dataType: 'json',
+	            success: function (message) {
+	                swal(items.length + " products have been added to your list!", {
+	                    icon: "success"
+	                });
+                    },
+	            error: function () {
+                        toastr["error"]("basarisiz", "basarisiz");
+                        //App.unblockUI();
+                    }
+            });
+    }
+
+    var MusteriKampanyaTeklifiDuzenle = function (id, items) {
+        var formData = { masterid: id, seciliKampanyalar: JSON.stringify(items) };
+        $.ajax({
+            type: "POST",
+            url: '/MusteriTeklifleri/MusteriKampanyaTeklifiDuzenle',
+            data: formData,
+            dataType: 'json',
+            success: function (message) {
+                swal(items.length + " products have been added to your list!", {
+                    icon: "success"
+                });
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+
+</script>

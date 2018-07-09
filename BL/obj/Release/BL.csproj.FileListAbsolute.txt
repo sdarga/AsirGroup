@@ -1,0 +1,17 @@
+D:\Projeler\Asir\AsirGorup\BL\bin\Release\BL.dll.config
+D:\Projeler\Asir\AsirGorup\BL\bin\Release\BL.dll
+D:\Projeler\Asir\AsirGorup\BL\bin\Release\BL.pdb
+D:\Projeler\Asir\AsirGorup\BL\bin\Release\Core.dll
+D:\Projeler\Asir\AsirGorup\BL\bin\Release\EntityFramework.dll
+D:\Projeler\Asir\AsirGorup\BL\bin\Release\EntityFramework.SqlServer.dll
+D:\Projeler\Asir\AsirGorup\BL\bin\Release\Newtonsoft.Json.dll
+D:\Projeler\Asir\AsirGorup\BL\bin\Release\System.Data.Entity.Repository.dll
+D:\Projeler\Asir\AsirGorup\BL\bin\Release\Core.pdb
+D:\Projeler\Asir\AsirGorup\BL\bin\Release\EntityFramework.xml
+D:\Projeler\Asir\AsirGorup\BL\bin\Release\EntityFramework.SqlServer.xml
+D:\Projeler\Asir\AsirGorup\BL\bin\Release\Newtonsoft.Json.xml
+D:\Projeler\Asir\AsirGorup\BL\obj\Release\BL.csprojResolveAssemblyReference.cache
+D:\Projeler\Asir\AsirGorup\BL\obj\Release\BL.csproj.CoreCompileInputs.cache
+D:\Projeler\Asir\AsirGorup\BL\obj\Release\BL.csproj.CopyComplete
+D:\Projeler\Asir\AsirGorup\BL\obj\Release\BL.dll
+D:\Projeler\Asir\AsirGorup\BL\obj\Release\BL.pdb

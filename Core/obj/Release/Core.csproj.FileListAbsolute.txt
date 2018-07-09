@@ -1,0 +1,11 @@
+D:\Projeler\Asir\AsirGorup\Core\bin\Release\Core.dll
+D:\Projeler\Asir\AsirGorup\Core\bin\Release\Core.pdb
+D:\Projeler\Asir\AsirGorup\Core\bin\Release\Newtonsoft.Json.dll
+D:\Projeler\Asir\AsirGorup\Core\bin\Release\protobuf-net.dll
+D:\Projeler\Asir\AsirGorup\Core\bin\Release\Newtonsoft.Json.xml
+D:\Projeler\Asir\AsirGorup\Core\bin\Release\protobuf-net.xml
+D:\Projeler\Asir\AsirGorup\Core\obj\Release\Core.csprojResolveAssemblyReference.cache
+D:\Projeler\Asir\AsirGorup\Core\obj\Release\Core.csproj.CoreCompileInputs.cache
+D:\Projeler\Asir\AsirGorup\Core\obj\Release\Core.csproj.CopyComplete
+D:\Projeler\Asir\AsirGorup\Core\obj\Release\Core.dll
+D:\Projeler\Asir\AsirGorup\Core\obj\Release\Core.pdb

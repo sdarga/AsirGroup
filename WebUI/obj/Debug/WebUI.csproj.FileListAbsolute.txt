@@ -1,0 +1,152 @@
+D:\Asır Grup Web\AsirGorup\WebUI\bin\ApplicationInsights.config
+D:\Asır Grup Web\AsirGorup\WebUI\bin\WebUI.dll.config
+D:\Asır Grup Web\AsirGorup\WebUI\bin\WebUI.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\WebUI.pdb
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Antlr3.Runtime.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Kendo.Mvc.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.AI.Agent.Intercept.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.AI.DependencyCollector.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.AI.Web.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.AI.WindowsServer.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.ApplicationInsights.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.Web.Infrastructure.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Newtonsoft.Json.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.Helpers.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.Mvc.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.Optimization.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.Razor.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.WebPages.Deployment.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.WebPages.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.WebPages.Razor.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\WebGrease.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Antlr3.Runtime.pdb
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Kendo.Mvc.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.AI.DependencyCollector.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.AI.Web.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.AI.WindowsServer.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Microsoft.ApplicationInsights.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Newtonsoft.Json.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.Helpers.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.Mvc.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.Optimization.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.Razor.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.WebPages.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.WebPages.Deployment.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\System.Web.WebPages.Razor.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\bg-BG\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\cs-CZ\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\da-DK\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\de-DE\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\es-ES\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\fr-FR\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\it-IT\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\nl-NL\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\pl-PL\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\pt-BR\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\pt-PT\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\ro-RO\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\ru-RU\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\sv-SE\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\tr-TR\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\uk-UA\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\zh-CN\Kendo.Mvc.resources.dll
+D:\Asır Grup Web\AsirGorup\WebUI\obj\Debug\WebUI.csprojResolveAssemblyReference.cache
+D:\Asır Grup Web\AsirGorup\WebUI\obj\Debug\WebUI.dll
+D:\Asır Grup Web\AsirGorup\WebUI\obj\Debug\WebUI.pdb
+D:\Asır Grup Web\AsirGorup\WebUI\bin\BL.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Core.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\EntityFramework.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\BL.pdb
+D:\Asır Grup Web\AsirGorup\WebUI\bin\Core.pdb
+D:\Asır Grup Web\AsirGorup\WebUI\bin\EntityFramework.xml
+D:\Asır Grup Web\AsirGorup\WebUI\bin\EntityFramework.SqlServer.dll
+D:\Asır Grup Web\AsirGorup\WebUI\bin\EntityFramework.SqlServer.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\ApplicationInsights.config
+D:\Projeler\Asir\AsirGorup\WebUI\bin\WebUI.dll.config
+D:\Projeler\Asir\AsirGorup\WebUI\bin\WebUI.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\WebUI.pdb
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Antlr3.Runtime.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\BL.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Core.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\EntityFramework.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\EntityFramework.SqlServer.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Kendo.Mvc.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AI.Agent.Intercept.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AI.DependencyCollector.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AI.Web.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AI.WindowsServer.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.ApplicationInsights.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AspNet.Identity.Core.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.Owin.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.Owin.Security.Cookies.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.Owin.Security.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.Owin.Security.OAuth.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.Web.Infrastructure.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Newtonsoft.Json.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Owin.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.Helpers.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.Mvc.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.Optimization.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.Razor.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.WebPages.Deployment.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.WebPages.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.WebPages.Razor.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\WebGrease.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\BL.pdb
+D:\Projeler\Asir\AsirGorup\WebUI\bin\BL.dll.config
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Core.pdb
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Antlr3.Runtime.pdb
+D:\Projeler\Asir\AsirGorup\WebUI\bin\EntityFramework.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\EntityFramework.SqlServer.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Kendo.Mvc.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AI.DependencyCollector.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AI.Web.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AI.WindowsServer.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.ApplicationInsights.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.Owin.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.Owin.Security.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\Newtonsoft.Json.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.Helpers.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.Mvc.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.Optimization.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.Razor.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.WebPages.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.WebPages.Deployment.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\System.Web.WebPages.Razor.xml
+D:\Projeler\Asir\AsirGorup\WebUI\bin\bg-BG\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\cs-CZ\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\da-DK\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\de-DE\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\es-ES\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\fr-FR\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\it-IT\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\nl-NL\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\pl-PL\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\pt-BR\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\pt-PT\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\ro-RO\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\ru-RU\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\sv-SE\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\tr-TR\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\uk-UA\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\bin\zh-CN\Kendo.Mvc.resources.dll
+D:\Projeler\Asir\AsirGorup\WebUI\obj\Debug\WebUI.csprojResolveAssemblyReference.cache
+D:\Projeler\Asir\AsirGorup\WebUI\obj\Debug\WebUI.csproj.CoreCompileInputs.cache
+D:\Projeler\Asir\AsirGorup\WebUI\obj\Debug\WebUI.csproj.CopyComplete
+D:\Projeler\Asir\AsirGorup\WebUI\obj\Debug\WebUI.dll
+D:\Projeler\Asir\AsirGorup\WebUI\obj\Debug\WebUI.pdb

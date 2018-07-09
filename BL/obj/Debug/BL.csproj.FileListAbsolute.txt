@@ -1,0 +1,32 @@
+D:\Asır Grup Web\AsirGorup\BL\bin\Debug\BL.dll
+D:\Asır Grup Web\AsirGorup\BL\bin\Debug\BL.pdb
+D:\Asır Grup Web\AsirGorup\BL\obj\Debug\BL.dll
+D:\Asır Grup Web\AsirGorup\BL\obj\Debug\BL.pdb
+D:\Asır Grup Web\AsirGorup\BL\bin\Debug\BL.dll.config
+D:\Asır Grup Web\AsirGorup\BL\bin\Debug\EntityFramework.dll
+D:\Asır Grup Web\AsirGorup\BL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Asır Grup Web\AsirGorup\BL\bin\Debug\Newtonsoft.Json.dll
+D:\Asır Grup Web\AsirGorup\BL\bin\Debug\EntityFramework.xml
+D:\Asır Grup Web\AsirGorup\BL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Asır Grup Web\AsirGorup\BL\bin\Debug\Newtonsoft.Json.xml
+D:\Asır Grup Web\AsirGorup\BL\bin\Debug\System.Data.Entity.Repository.dll
+D:\Asır Grup Web\AsirGorup\BL\bin\Debug\Core.dll
+D:\Asır Grup Web\AsirGorup\BL\bin\Debug\Core.pdb
+D:\Asır Grup Web\AsirGorup\BL\obj\Debug\BL.csprojResolveAssemblyReference.cache
+D:\Projeler\Asir\AsirGorup\BL\bin\Debug\BL.dll.config
+D:\Projeler\Asir\AsirGorup\BL\bin\Debug\BL.dll
+D:\Projeler\Asir\AsirGorup\BL\bin\Debug\BL.pdb
+D:\Projeler\Asir\AsirGorup\BL\bin\Debug\Core.dll
+D:\Projeler\Asir\AsirGorup\BL\bin\Debug\EntityFramework.dll
+D:\Projeler\Asir\AsirGorup\BL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projeler\Asir\AsirGorup\BL\bin\Debug\Newtonsoft.Json.dll
+D:\Projeler\Asir\AsirGorup\BL\bin\Debug\System.Data.Entity.Repository.dll
+D:\Projeler\Asir\AsirGorup\BL\bin\Debug\Core.pdb
+D:\Projeler\Asir\AsirGorup\BL\bin\Debug\EntityFramework.xml
+D:\Projeler\Asir\AsirGorup\BL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projeler\Asir\AsirGorup\BL\bin\Debug\Newtonsoft.Json.xml
+D:\Projeler\Asir\AsirGorup\BL\obj\Debug\BL.csprojResolveAssemblyReference.cache
+D:\Projeler\Asir\AsirGorup\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache
+D:\Projeler\Asir\AsirGorup\BL\obj\Debug\BL.csproj.CopyComplete
+D:\Projeler\Asir\AsirGorup\BL\obj\Debug\BL.dll
+D:\Projeler\Asir\AsirGorup\BL\obj\Debug\BL.pdb

@@ -1,0 +1,29 @@
+D:\Asır Grup Web\AsirGorup\WebApi\bin\Debug\WebApi.dll
+D:\Asır Grup Web\AsirGorup\WebApi\bin\Debug\WebApi.pdb
+D:\Asır Grup Web\AsirGorup\WebApi\obj\Debug\WebApi.dll
+D:\Asır Grup Web\AsirGorup\WebApi\obj\Debug\WebApi.pdb
+D:\Asır Grup Web\AsirGorup\WebApi\bin\Debug\WebApi.dll.config
+D:\Asır Grup Web\AsirGorup\WebApi\bin\Debug\BL.dll
+D:\Asır Grup Web\AsirGorup\WebApi\bin\Debug\Core.dll
+D:\Asır Grup Web\AsirGorup\WebApi\bin\Debug\EntityFramework.dll
+D:\Asır Grup Web\AsirGorup\WebApi\bin\Debug\BL.pdb
+D:\Asır Grup Web\AsirGorup\WebApi\bin\Debug\Core.pdb
+D:\Asır Grup Web\AsirGorup\WebApi\bin\Debug\EntityFramework.xml
+D:\Asır Grup Web\AsirGorup\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
+D:\Projeler\Asir\AsirGorup\WebApi\bin\Debug\WebApi.dll.config
+D:\Projeler\Asir\AsirGorup\WebApi\bin\Debug\WebApi.dll
+D:\Projeler\Asir\AsirGorup\WebApi\bin\Debug\WebApi.pdb
+D:\Projeler\Asir\AsirGorup\WebApi\bin\Debug\BL.dll
+D:\Projeler\Asir\AsirGorup\WebApi\bin\Debug\Core.dll
+D:\Projeler\Asir\AsirGorup\WebApi\bin\Debug\EntityFramework.dll
+D:\Projeler\Asir\AsirGorup\WebApi\bin\Debug\Newtonsoft.Json.dll
+D:\Projeler\Asir\AsirGorup\WebApi\bin\Debug\BL.pdb
+D:\Projeler\Asir\AsirGorup\WebApi\bin\Debug\BL.dll.config
+D:\Projeler\Asir\AsirGorup\WebApi\bin\Debug\Core.pdb
+D:\Projeler\Asir\AsirGorup\WebApi\bin\Debug\EntityFramework.xml
+D:\Projeler\Asir\AsirGorup\WebApi\bin\Debug\Newtonsoft.Json.xml
+D:\Projeler\Asir\AsirGorup\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
+D:\Projeler\Asir\AsirGorup\WebApi\obj\Debug\WebApi.csproj.CoreCompileInputs.cache
+D:\Projeler\Asir\AsirGorup\WebApi\obj\Debug\WebApi.csproj.CopyComplete
+D:\Projeler\Asir\AsirGorup\WebApi\obj\Debug\WebApi.dll
+D:\Projeler\Asir\AsirGorup\WebApi\obj\Debug\WebApi.pdb
