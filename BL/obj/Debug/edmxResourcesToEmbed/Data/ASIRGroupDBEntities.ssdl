@@ -555,7 +555,7 @@ warning 6002: The table/view 'ASIRGroupDB.dbo.Sabitler' does not have a primary 
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Sirket_Kod" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="SKUKodu" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="Marka" Type="varchar" MaxLength="50" Nullable="false" />
@@ -800,6 +800,7 @@ warning 6037: Foreign key constraint 'FK_TeklifDetay_TeklifMaster' has been omit
     <Parameter Name="spBakiyeler" Type="bit" Mode="In" />
     <Parameter Name="spResimli" Type="bit" Mode="In" />
     <Parameter Name="spKullaniciRole" Type="varchar" Mode="In" />
+    <Parameter Name="spKullaniciNo" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="ASIRGroupDBModelStoreContainer">
     <EntitySet Name="CariKart" EntityType="Self.CariKart" Schema="dbo" store:Type="Tables" />

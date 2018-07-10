@@ -142,14 +142,77 @@ namespace WebUI.Controllers
 
         public JsonResult KampanyaTreeDoldur()
         {
+            //string webKullaniciNo = Session["WebKullaniciNo"].ToString();
+            //WebKullanicilari webKullanicilari = this.db.WebKullanicilari.FirstOrDefault(w => w.WebKullaniciNo == webKullaniciNo);
+            //List<WebKullaniciYetkileri> webKullaniciYetkileri = webKullanicilari.WebKullaniciYetkileri.ToList();
+            //List<jsTree> Tree = new List<jsTree>();
+            ///* Kategoriler ve kampanyalar*/
+            //List<Kategoriler> kategoriler = (from kat in db.Kategoriler
+            //                  join kam in db.Kampanyalar.Where(w => w.Aktif && w.PortaldeGoster) on kat.id equals kam.Kategoriid
+            //                  select new Kategoriler()
+            //                  {
+            //                      id = kat.id,
+            //                      Tanim = kat.Tanim
+            //                  }).ToList();
+
+            //foreach (var kategori in kategoriler)
+            //{
+            //    jsTree Node = new jsTree();
+            //    Node = new jsTree();
+            //    Node.id = "*" + kategori.id;
+            //    Node.text = kategori.Tanim;
+            //    Node.parent = "#";
+            //    Node.state = new jsTree_state() { opened = false, disabled = false, selected = false };
+            //    Node.li_attr = new jsTree_attr { @class = "root" };
+
+
+            //    if (webKullaniciYetkileri.Count() != 0)
+            //    {
+            //        if (!webKullaniciYetkileri.Select(s => s.Kategoriid).Contains(kategori.id)) continue;
+            //    }
+
+            //    Tree.Add(Node);
+
+            //    List<Kampanyalar> kategoriyegoreKampanyalar = db.Kampanyalar
+            //                                                    .Where(w => w.Kategoriid == kategori.id && w.Aktif && w.PortaldeGoster)
+            //                                                    .OrderBy(oby => oby.Tanim).ToList();
+
+            //    foreach (var kampanya in kategoriyegoreKampanyalar)
+            //    {
+            //        Node = new jsTree();
+            //        Node.id = "$" + kampanya.id.ToString();
+            //        Node.text = kampanya.Tanim;
+            //        Node.parent = "*" + kampanya.Kategoriid;
+            //        Node.state = new jsTree_state() { opened = false, disabled = false, selected = false };
+            //        Node.li_attr = new jsTree_attr { @class = "treeKampanya" };
+            //        if (Request.IsAuthenticated && webKullanicilari.WebKullaniciRoles == "Kategori")
+            //        {
+            //            Node.li_attr = new jsTree_attr()
+            //            {
+            //                @class = "hidden"
+            //            };
+            //        }
+            //        Tree.Add(Node);
+            //    }
+            //}
+
+            //return Json(Tree, JsonRequestBehavior.AllowGet);
+
             string webKullaniciNo = Session["WebKullaniciNo"].ToString();
             WebKullanicilari webKullanicilari = this.db.WebKullanicilari.FirstOrDefault(w => w.WebKullaniciNo == webKullaniciNo);
             List<WebKullaniciYetkileri> webKullaniciYetkileri = webKullanicilari.WebKullaniciYetkileri.ToList();
             List<jsTree> Tree = new List<jsTree>();
             /* Kategoriler ve kampanyalar*/
-            List<Kampanyalar> kampanyalar = db.Kampanyalar.ToList();
+            List<Kampanyalar> kampanyalar = db.Kampanyalar.Where(w => w.Aktif && w.PortaldeGoster).OrderBy(o => o.Tanim).ToList();
             jsTree Node = new jsTree();
-            var kategoriyeKampanyalar = kampanyalar.GroupBy(group => group.Kategoriid).Select(select => new { key = select.Key, item = select.ToList() });
+            //var kategoriyeGoreKampanyalar = kampanyalar.GroupBy(group => group.Kategoriid).Select(select => new { key = select.Key, item = select.ToList().OrderBy(o => o.Kategoriler.Tanim) });
+            var kategoriyeGoreKampanyalar = (from w in kampanyalar
+                                            where w.Aktif
+                                            select w into oby
+                                            orderby oby.Kategoriler.Tanim
+                                            select oby into g
+                                            group g by g.Kategoriid into s
+                                            select new { kategoriId = s.Key, kampanyalar = s.ToList<Kampanyalar>() }).ToList();
 
             //Node = new jsTree();
             //Node.id = "**" + "0";
@@ -159,15 +222,15 @@ namespace WebUI.Controllers
             //Node.li_attr = new jsTree_attr { @class = "root" };
             //Tree.Add(Node);
 
-            foreach (var grupItem in kategoriyeKampanyalar.ToList())
+            foreach (var grupItem in kategoriyeGoreKampanyalar.ToList())
             {
                 //foreach (var yetki in webKullaniciYetkileri)
                 //{
                 //    yetki.Kategoriid
                 //}
                 Node = new jsTree();
-                Node.id = "*" + grupItem.key;
-                Node.text = grupItem.item.Where(w => w.Kategoriid == grupItem.key).Select(s => s.Kategoriler.Tanim).FirstOrDefault();
+                Node.id = "*" + grupItem.kategoriId;
+                Node.text = grupItem.kampanyalar.Where(w => w.Kategoriid == grupItem.kategoriId).Select(s => s.Kategoriler.Tanim).FirstOrDefault();
                 Node.parent = "#";
                 Node.state = new jsTree_state() { opened = false, disabled = false, selected = false };
                 Node.li_attr = new jsTree_attr { @class = "root" };
@@ -175,20 +238,20 @@ namespace WebUI.Controllers
 
                 if (webKullaniciYetkileri.Count() != 0)
                 {
-                    if (!webKullaniciYetkileri.Select(s => s.Kategoriid).Contains(grupItem.key)) continue;
+                    if (!webKullaniciYetkileri.Select(s => s.Kategoriid).Contains(grupItem.kategoriId)) continue;
                 }
 
                 Tree.Add(Node);
 
-                foreach (var item in grupItem.item)
+                foreach (var item in grupItem.kampanyalar)
                 {
                     Node = new jsTree();
                     Node.id = "$" + item.id.ToString();
                     Node.text = item.Tanim;
-                    Node.parent = "*" + grupItem.key;
+                    Node.parent = "*" + grupItem.kategoriId;
                     Node.state = new jsTree_state() { opened = false, disabled = false, selected = false };
                     Node.li_attr = new jsTree_attr { @class = "treeKampanya" };
-                    if (Request.IsAuthenticated && webKullanicilari.WebKullaniciRoles == "Kampanya")
+                    if (Request.IsAuthenticated && webKullanicilari.WebKullaniciRoles == "Kategori")
                     {
                         Node.li_attr = new jsTree_attr()
                         {
@@ -441,7 +504,11 @@ namespace WebUI.Controllers
                     SqlCommand sqlCommand = new SqlCommand()
                     {
                         Connection = (SqlConnection)this.db.Database.Connection,
-                        CommandText = string.Concat(new object[] { "EXECUTE StokKartAramaWeb @sp_Sirket_Kod = '1', @spGenelid = ", genelID.ToString(), " , @spAramaMetni = '", filtre, "', @spBakiyeler = 0, @spResimli = 0, @spKullaniciRole = '", base.Session["WebKullaniciRoles"], "'" })
+                        CommandText = string.Concat(
+                                                new object[] { "EXECUTE StokKartAramaWeb @sp_Sirket_Kod = '1', @spGenelid = ", genelID.ToString(),
+                                                               " , @spAramaMetni = '", filtre,
+                                                               "', @spBakiyeler = 0, @spResimli = 0, @spKullaniciRole = '",
+                                                               base.Session["WebKullaniciRoles"], "', @spKullaniciNo = '", base.Session["WebKullaniciNo"], "'" })
                     };
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
                     if (sqlDataReader != null)
@@ -523,6 +590,8 @@ namespace WebUI.Controllers
 
         public JsonResult GetImageSeriesFromFolder(string imageName)
         {
+            //Array.ForEach(System.IO.Directory.GetFiles(base.Server.MapPath("~/Images")), System.IO.File.Delete);
+
             List<string> strs = new List<string>();
             try
             {

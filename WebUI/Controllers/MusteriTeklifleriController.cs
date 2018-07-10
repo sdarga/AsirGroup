@@ -37,11 +37,11 @@ namespace WebUI.Controllers
             ActionResult actionResult;
             try
             {
-                List<int> ınt32s = (List<int>)(new JavaScriptSerializer()).Deserialize(seciliKampanyalar, typeof(List<int>));
-                string str = base.Session["genelID"].ToString();
-                string str1 = base.Session["filtre"].ToString();
-                List<StokKartAramaWeb_Result> list = this.db.StokKartAramaWeb("1", new int?(Convert.ToInt32(str)), str1, new bool?(false), new bool?(false),"").ToList<StokKartAramaWeb_Result>();
-                foreach (int ınt32 in ınt32s)
+                List<int> seciliKampanyaIDleri = (List<int>)(new JavaScriptSerializer()).Deserialize(seciliKampanyalar, typeof(List<int>));
+                string genelID = base.Session["genelID"].ToString();
+                string filtre = base.Session["filtre"].ToString();
+                List<StokKartAramaWeb_Result> list = this.db.StokKartAramaWeb("1", new int?(Convert.ToInt32(genelID)), filtre, new bool?(false), new bool?(false),"", Session["WebKullaniciNo"].ToString()).ToList<StokKartAramaWeb_Result>();
+                foreach (int seciliKampanyaID in seciliKampanyaIDleri)
                 {
                     using (ASIRGroupDBEntities aSIRGroupDBEntity = new ASIRGroupDBEntities())
                     {
@@ -95,11 +95,10 @@ namespace WebUI.Controllers
                                 AlisKDVOrani = item.AlisKDVOrani,
                                 SatisKDVOrani = item.SatisKDVOrani
                             } into w
-                            //where w.id == this.seciliKampanyaID
+                            where w.id == seciliKampanyaID
                             select w).FirstOrDefault<StokKartAramaWebDTO>();
-                        if ((
-                            from w in aSIRGroupDBEntity.MusteriTeklifDetay
-                            where w.SKUKodu == stokKartAramaWebDTO.SKUKodu && w.Masterid == masterid
+                        if ((from w in aSIRGroupDBEntity.MusteriTeklifDetay
+                             where w.SKUKodu == stokKartAramaWebDTO.SKUKodu && w.Masterid == masterid
                              select w).Count<MusteriTeklifDetay>() <= 0)
                         {
                             MusteriTeklifDetay musteriTeklifDetay = new MusteriTeklifDetay()
@@ -175,7 +174,7 @@ namespace WebUI.Controllers
                 this.db.SaveChanges();
                 string str = base.Session["genelID"].ToString();
                 string str1 = base.Session["filtre"].ToString();
-                List<StokKartAramaWeb_Result> list = this.db.StokKartAramaWeb("1", new int?(Convert.ToInt32(str)), str1, new bool?(false), new bool?(false),"").ToList<StokKartAramaWeb_Result>();
+                List<StokKartAramaWeb_Result> list = this.db.StokKartAramaWeb("1", new int?(Convert.ToInt32(str)), str1, new bool?(false), new bool?(false),"", Session["WebKullaniciNo"].ToString()).ToList<StokKartAramaWeb_Result>();
                 foreach (int ınt32 in ınt32s)
                 {
                     using (ASIRGroupDBEntities aSIRGroupDBEntity = new ASIRGroupDBEntities())
@@ -287,7 +286,46 @@ namespace WebUI.Controllers
                         SqlCommand sqlCommand = new SqlCommand()
                         {
                             Connection = (SqlConnection)this.db.Database.Connection,
-                            CommandText = string.Concat(new object[] { " Set nocount on                                                                                                                                             Set Dateformat dmy                                                                                                                                                                                                                                                                                                     Declare @DovizKod varchar(10), @Tarih smalldatetime                                                                                                        Declare @sp_Sirket_Kod varchar(10), @spMasterid int                                                                                                                                                           select s.SKUKodu, s.StokIsmi, s.Marka, s.UrunBarkodNo, s.Ozellik, s.EkstraOzellik, s.Renk, s.AlisFiyati, s.Puan, s.En, s.Boy, s.Yukseklik,          s.Agirlik, s.DovizKodu, s.UreticiBarkodNo, s.UreticiStokKodu,                                                                                              isnull((select Tanim from Kampanyalar where Sirket_Kod = s.Sirket_Kod and id = s.Kampanyaid), '') KampanyaDosyaIsmi,                                       isnull((select StokAciklama from StokKartiTanim where Sirket_Kod = s.Sirket_Kod and id = s.Aciklamaid),'') StokAciklama                                 into #Stok                                                                                                                                             from StokKarti s where s.Sirket_Kod = 1 and                                                                                                                           exists(select id from MusteriTeklifDetay where Sirket_Kod = s.Sirket_Kod and SKUKodu = s.SKUKodu and Masterid = ", masterID, " )                                                                                                                                                                                                                                                                                                                      set @DovizKod = '???'                                                                                                                                      Select @DovizKod = DovizKod, @Tarih = Tarih  from MusteriTeklifMaster Where id =                                                             ", masterID, "                                                                                                                                                                                                          select @DovizKod DovizKod,                                                                                       d.*,                                                                                                                                                       isnull(s.StokIsmi, '') StokIsmi,                                                                                                                           isnull(s.Marka, '') Marka,                                                                                                                                 isnull(s.UrunBarkodNo, '') UrunBarkodNo,                                                                                                                   isnull(s.UreticiBarkodNo, '') UreticiBarkodNo,                                                                                                             isnull(s.UreticiStokKodu, '') UreticiStokKodu,                                                                                                             isnull(s.StokAciklama, '') StokAciklama,                                                                                                                   isnull(s.KampanyaDosyaIsmi, '') KampanyaDosyaIsmi,                                                                                                         isnull(s.Ozellik, '') Ozellik,                                                                                                                             isnull(s.EkstraOzellik, '') EkstraOzellik,                                                                                                                 isnull(s.Renk, '') Renk,                                                                                                                                   isnull(s.Puan, 0) Puan,                                                                                                                                    isnull(s.En, 0) En,                                                                                                                                        isnull(s.Boy, 0) Boy,                                                                                                                                      isnull(s.Yukseklik, 0) Yukseklik,                                                                                                                          isnull(s.Agirlik, 0) Agirlik,                                                                                                                              dbo.KonseptGetir(d.Sirket_Kod, d.SKUKodu) KonseptTanim,                                                                                                    round(isnull(s.AlisFiyati, 0) * dbo.DovizKuruBul(@Tarih, isnull(s.DovizKodu, 'TRL'), 'TRL'), 2) as AlisFiyatiTL                                         from MusteriTeklifDetay d inner                                                                                                                            join #Stok s on d.SKUKodu=s.SKUKodu                                                                                                                        where d.Masterid =                                                                                                                            ", masterID, "  order by s.KampanyaDosyaIsmi,  s.AlisFiyati, s.Marka, s.StokAciklama, s.StokIsmi                                                                         " })
+                            CommandText = string.Concat(new object[] 
+                            {
+                                " Set nocount on " +
+                                " Set Dateformat dmy" +
+                                " Declare @DovizKod varchar(10), @Tarih smalldatetime" +
+                                " Declare @sp_Sirket_Kod varchar(10), @spMasterid int" +
+                                " select s.SKUKodu, s.StokIsmi, s.Marka, s.UrunBarkodNo, " +
+                                " s.Ozellik, s.EkstraOzellik, s.Renk, " +
+                                " s.AlisFiyati, s.Puan, s.En, s.Boy, s.Yukseklik, " +
+                                " s.Agirlik, s.DovizKodu, s.UreticiBarkodNo, s.UreticiStokKodu,                                                                                              " +
+                                " isnull((select Tanim from Kampanyalar where Sirket_Kod = s.Sirket_Kod and id = s.Kampanyaid), '') KampanyaDosyaIsmi,                                       " +
+                                " isnull((select StokAciklama from StokKartiTanim where Sirket_Kod = s.Sirket_Kod and id = s.Aciklamaid),'') StokAciklama                                 " +
+                                " into #Stok                                                                                                                                             " +
+                                " from StokKarti s where s.Sirket_Kod = 1 and                                                                                                                           " +
+                                " exists(select id from MusteriTeklifDetay where Sirket_Kod = s.Sirket_Kod and SKUKodu = s.SKUKodu and Masterid = ", masterID, " )" +
+                                " set @DovizKod = '???'                                                                                                                                      " +
+                                " Select @DovizKod = DovizKod, @Tarih = Tarih  from MusteriTeklifMaster Where id = ", masterID, "" +
+                                " select @DovizKod DovizKod, d.*,                                                                                                                                                       " +
+                                " isnull(s.StokIsmi, '') StokIsmi,                                                                                                                           " +
+                                " isnull(s.Marka, '') Marka,                                                                                                                                 " +
+                                " isnull(s.UrunBarkodNo, '') UrunBarkodNo,                                                                                                                   " +
+                                " isnull(s.UreticiBarkodNo, '') UreticiBarkodNo,                                                                                                             " +
+                                " isnull(s.UreticiStokKodu, '') UreticiStokKodu,                                                                                                             " +
+                                " isnull(s.StokAciklama, '') StokAciklama,                                                                                                                   " +
+                                " isnull(s.KampanyaDosyaIsmi, '') KampanyaDosyaIsmi,                                                                                                         " +
+                                " isnull(s.Ozellik, '') Ozellik,                                                                                                                             " +
+                                " isnull(s.EkstraOzellik, '') EkstraOzellik,                                                                                                                 " +
+                                " isnull(s.Renk, '') Renk,                                                                                                                                   " +
+                                " isnull(s.Puan, 0) Puan,                                                                                                                                    " +
+                                " isnull(s.En, 0) En,                                                                                                                                        " +
+                                " isnull(s.Boy, 0) Boy,                                                                                                                                      " +
+                                " isnull(s.Yukseklik, 0) Yukseklik,                                                                                                                          " +
+                                " isnull(s.Agirlik, 0) Agirlik,                                                                                                                              " +
+                                " dbo.KonseptGetir(d.Sirket_Kod, d.SKUKodu) KonseptTanim,                                                                                                    " +
+                                " round(isnull(s.AlisFiyati, 0) * dbo.DovizKuruBul(@Tarih, isnull(s.DovizKodu, 'TRL'), 'TRL'), 2) as AlisFiyatiTL                                         " +
+                                " from MusteriTeklifDetay d inner                                                                                                                            " +
+                                " join #Stok s on d.SKUKodu=s.SKUKodu                                                                                                                        " +
+                                " where d.Masterid =  ", masterID, "  " +
+                                " order by s.KampanyaDosyaIsmi,  s.AlisFiyati, s.Marka, s.StokAciklama, s.StokIsmi "
+                            })
                         };
                         SqlDataReader sqlDataReader = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
                         if (sqlDataReader != null)
@@ -340,7 +378,7 @@ namespace WebUI.Controllers
                                 });
                             }
                             sqlDataReader.Close();
-                            JsonResult nullable = base.Json(musteriTeklifDetayDTOs.ToDataSourceResult(request, (MusteriTeklifDetayDTO p) => new { DovizKod = p.DovizKod, id = p.id, Sirket_Kod = p.Sirket_Kod, Masterid = p.Masterid, SKUKodu = p.SKUKodu, BirTaneicinAlisFiyati = p.BirTaneicinAlisFiyati, ListeAlisFiyati = p.ListeAlisFiyati, SatisFiyati = p.SatisFiyati, OzelFiyat = p.OzelFiyat, Marj = p.Marj, RetailFiyat = p.RetailFiyat, Miktar = p.Miktar, Iptal = p.Iptal, KayitTarihi = p.KayitTarihi, KullaniciKodu = p.KullaniciKodu, DegisiklikTarihi = p.DegisiklikTarihi, DegKullaniciKodu = p.DegKullaniciKodu, TedarikciStogu = p.TedarikciStogu, AsirStok = p.AsirStok, BlokeStok = p.BlokeStok, KalanStok = p.KalanStok, VerilecekStok = p.VerilecekStok, UyariMarj = p.UyariMarj, sipdetayid = p.sipdetayid, Marka = p.Marka, UreticiBarkodNo = p.UreticiBarkodNo, UrunBarkodNo = p.UrunBarkodNo, StokIsmi = p.StokIsmi, StokAciklama = p.StokAciklama, Ozellik = p.Ozellik, EkstraOzellik = p.EkstraOzellik, Renk = p.Renk, AlisFiyatiTL = p.AlisFiyatiTL, En = p.En, Boy = p.Boy, Yukseklik = p.Yukseklik, Agirlik = p.Agirlik, Puan = p.Puan, UreticiStokKodu = p.UreticiStokKodu, KonseptTanim = p.KonseptTanim }), JsonRequestBehavior.AllowGet);
+                            JsonResult nullable = base.Json(musteriTeklifDetayDTOs.OrderByDescending(o=>o.id).ToDataSourceResult(request, (MusteriTeklifDetayDTO p) => new { DovizKod = p.DovizKod, id = p.id, Sirket_Kod = p.Sirket_Kod, Masterid = p.Masterid, SKUKodu = p.SKUKodu, BirTaneicinAlisFiyati = p.BirTaneicinAlisFiyati, ListeAlisFiyati = p.ListeAlisFiyati, SatisFiyati = p.SatisFiyati, OzelFiyat = p.OzelFiyat, Marj = p.Marj, RetailFiyat = p.RetailFiyat, Miktar = p.Miktar, Iptal = p.Iptal, KayitTarihi = p.KayitTarihi, KullaniciKodu = p.KullaniciKodu, DegisiklikTarihi = p.DegisiklikTarihi, DegKullaniciKodu = p.DegKullaniciKodu, TedarikciStogu = p.TedarikciStogu, AsirStok = p.AsirStok, BlokeStok = p.BlokeStok, KalanStok = p.KalanStok, VerilecekStok = p.VerilecekStok, UyariMarj = p.UyariMarj, sipdetayid = p.sipdetayid, Marka = p.Marka, UreticiBarkodNo = p.UreticiBarkodNo, UrunBarkodNo = p.UrunBarkodNo, StokIsmi = p.StokIsmi, StokAciklama = p.StokAciklama, Ozellik = p.Ozellik, EkstraOzellik = p.EkstraOzellik, Renk = p.Renk, AlisFiyatiTL = p.AlisFiyatiTL, En = p.En, Boy = p.Boy, Yukseklik = p.Yukseklik, Agirlik = p.Agirlik, Puan = p.Puan, UreticiStokKodu = p.UreticiStokKodu, KonseptTanim = p.KonseptTanim }), JsonRequestBehavior.AllowGet);
                             nullable.MaxJsonLength = new int?(2147483647);
                             actionResult = nullable;
                         }

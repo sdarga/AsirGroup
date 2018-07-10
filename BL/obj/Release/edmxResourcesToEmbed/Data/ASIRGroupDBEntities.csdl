@@ -809,6 +809,7 @@
       <Parameter Name="spBakiyeler" Mode="In" Type="Boolean" />
       <Parameter Name="spResimli" Mode="In" Type="Boolean" />
       <Parameter Name="spKullaniciRole" Mode="In" Type="String" />
+      <Parameter Name="spKullaniciNo" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="MusteriKampanyalari" EntityType="ASIRGroupDBModel.MusteriKampanyalari" />
     <AssociationSet Name="FK_MusteriKampanyalari_CariKart" Association="ASIRGroupDBModel.FK_MusteriKampanyalari_CariKart">

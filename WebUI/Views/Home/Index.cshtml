@@ -475,7 +475,7 @@
             .ColumnMenu()
             .Pageable().Sortable()
             .Resizable(resize => resize.Columns(true))
-            .Scrollable(scrollable => scrollable.Virtual(true).Height(550))
+            .Scrollable(scrollable => scrollable.Virtual(false).Height(550))
             .DataSource(dataSource => dataSource
                 .Ajax().PageSize(100)
                 .Read(read => read.Action("MusteriTeklifDetayGetir", "MusteriTeklifleri", new { masterID = "#=MasterID#" }))
@@ -546,6 +546,7 @@
                 swal("Your list and products in the list has been deleted!", {
                     icon: "success",
                 });
+                urunEklemektenVazgec();
             } else {
                 swal("Your list and products in the list is safe!");
             }

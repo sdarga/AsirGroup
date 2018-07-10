@@ -129,7 +129,7 @@ namespace BL.Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MusteriKampanyalariGetir", sp_Sirket_KodParameter, spTarihParameter, spGenelidParameter);
         }
     
-        public virtual ObjectResult<StokKartAramaWeb_Result> StokKartAramaWeb(string sp_Sirket_Kod, Nullable<int> spGenelid, string spAramaMetni, Nullable<bool> spBakiyeler, Nullable<bool> spResimli, string spKullaniciRole)
+        public virtual ObjectResult<StokKartAramaWeb_Result> StokKartAramaWeb(string sp_Sirket_Kod, Nullable<int> spGenelid, string spAramaMetni, Nullable<bool> spBakiyeler, Nullable<bool> spResimli, string spKullaniciRole, string spKullaniciNo)
         {
             var sp_Sirket_KodParameter = sp_Sirket_Kod != null ?
                 new ObjectParameter("sp_Sirket_Kod", sp_Sirket_Kod) :
@@ -155,7 +155,11 @@ namespace BL.Data
                 new ObjectParameter("spKullaniciRole", spKullaniciRole) :
                 new ObjectParameter("spKullaniciRole", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StokKartAramaWeb_Result>("StokKartAramaWeb", sp_Sirket_KodParameter, spGenelidParameter, spAramaMetniParameter, spBakiyelerParameter, spResimliParameter, spKullaniciRoleParameter);
+            var spKullaniciNoParameter = spKullaniciNo != null ?
+                new ObjectParameter("spKullaniciNo", spKullaniciNo) :
+                new ObjectParameter("spKullaniciNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<StokKartAramaWeb_Result>("StokKartAramaWeb", sp_Sirket_KodParameter, spGenelidParameter, spAramaMetniParameter, spBakiyelerParameter, spResimliParameter, spKullaniciRoleParameter, spKullaniciNoParameter);
         }
     }
 }

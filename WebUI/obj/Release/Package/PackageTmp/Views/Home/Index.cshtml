@@ -280,7 +280,7 @@
                                         .AutoBind(false)
                                         .Resizable(resize => resize.Columns(true))
                                         //.Selectable()
-                                        .Scrollable(scrollable => scrollable.Virtual(true).Height(600))
+                                        .Scrollable(scrollable => scrollable.Virtual(false).Height(600))
                                         //.Sortable()
                                         .Filterable(ftb => ftb.Mode(GridFilterMode.Row))
                                         .ColumnMenu()
